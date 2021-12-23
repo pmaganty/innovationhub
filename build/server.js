@@ -8,9 +8,10 @@ var bodyParser = require("body-parser");
 var app = express();
 var PORT = 3000;
 app.use(bodyParser.json());
-// Define middleware here
+// Define middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+app.use(express.static("client/build"));
 app.use(routes_1.router);
 // Start the API server
 app.listen(PORT, function () {

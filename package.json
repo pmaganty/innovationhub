@@ -2,9 +2,9 @@
   "proxy": "http://localhost:5000/",
   "main": "main/server.js",
   "scripts": {
-    "start": "run-p --race start:server start:app",
+    "start": "npm run start:app && npm run start:server",
     "start:server": "tsc && node build/server.js",
-    "start:app": "cd client && npm run start"
+    "start:app": "cd client && npm run build"
   },
   "dependencies": {
     "express": "^4.17.2",

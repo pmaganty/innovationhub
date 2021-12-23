@@ -4,15 +4,16 @@ import { router } from "./routes";
 const bodyParser = require("body-parser");
 //const routes = require("./routes");
 
-
 const app = express();
 const PORT = 3000;
 
 app.use(bodyParser.json());
 
-// Define middleware here
+// Define middleware
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
+
+app.use(express.static("client/build"));
 
 app.use(router);
 
