@@ -1,7 +1,8 @@
 //const express = require("express");
 import * as express from "express";
+import { router } from "./routes";
 const bodyParser = require("body-parser");
-const routes = require("./routes");
+//const routes = require("./routes");
 
 
 const app = express();
@@ -13,11 +14,7 @@ app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-//app.use(routes);
-
-app.get('/api', (req,res)=>{
-    res.send({Id: 5, Name: "Pran"});
-})
+app.use(router);
 
 // Start the API server
 app.listen(PORT, function() {

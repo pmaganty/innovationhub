@@ -1,7 +1,8 @@
-const router = require("express").Router();
+import { Router } from "express";
+const router =  Router();
 
-/*
-router.use(function (req: Request, res: Response) {
-    res.send("TESTING API");
-  })
-*/
+router.get('/api', (req,res)=>{
+    res.send({Id: 5, Name: "Pran"});
+});
+
+export { router };
