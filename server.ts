@@ -2,6 +2,7 @@
 import * as express from "express";
 import { router } from "./routes";
 const bodyParser = require("body-parser");
+const pool = require("./models/db");
 //const routes = require("./routes");
 
 const app = express();
