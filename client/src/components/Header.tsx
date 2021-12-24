@@ -5,7 +5,7 @@ function Header() {
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-light">
-        <a className="navbar-brand" href="#">Navbar</a>
+        <a className="navbar-brand" href="#">IHub</a>
 
         <button className="navbar-toggler" type="button" data-toggle="collapse" 
         data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" 
