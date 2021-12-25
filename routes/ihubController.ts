@@ -1,7 +1,7 @@
 const db = require("../models/db");
-import * as express from "express";
 
-/*function addIdea(req,res) {
+module.exports = {
+    addIdea: function(req: any, res: any) {
         try {
             console.log(req.body);
             const firstName = req.body.firstName;
@@ -13,13 +13,14 @@ import * as express from "express";
             console.log(lastName);
             console.log(title);
             console.log(descr);
+            res.json({Id: 5, Name: "Pran"});
 
         } catch (error) {
             let message;
             if (error instanceof Error) message = error.message;
             else message = String(error);
             console.log(message);
+            res.json(message);
         }
-    }
- 
-    module.exports = addIdea;*/
+    }    
+  };
