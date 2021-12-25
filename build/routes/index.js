@@ -4,7 +4,6 @@ exports.router = void 0;
 var express_1 = require("express");
 //import ihubController from "../controllers/ihubController";
 var ihubController = require("./ihubController");
-//const test = require("./test");
 var router = (0, express_1.Router)();
 exports.router = router;
 router.get('/api', function (req, res) {
