@@ -7,3 +7,21 @@ exports.router = router;
 router.get('/api', function (req, res) {
     res.send({ Id: 5, Name: "Pran" });
 });
+router.post('/api/ihub', function (req, res) {
+    try {
+        console.log(req.body);
+        var firstName = req.body.firstName;
+        var lastName = req.body.lastName;
+        var title = req.body.title;
+        var descr = req.body.descr;
+        console.log(firstName);
+    }
+    catch (error) {
+        var message = void 0;
+        if (error instanceof Error)
+            message = error.message;
+        else
+            message = String(error);
+        console.log(message);
+    }
+});

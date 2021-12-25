@@ -4,6 +4,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 var express = require("express");
 var routes_1 = require("./routes");
 var bodyParser = require("body-parser");
+var pool = require("./models/db");
 //const routes = require("./routes");
 var app = express();
 var PORT = 3000;
