@@ -15,7 +15,7 @@ module.exports = {
             console.log(descr);
 
             const idea = await db.query("INSERT INTO ideas(firstName, lastName, title, descr) VALUES($1, $2, $3, $4)",
-                                        [req.body.firstName, req.body.lastName, req.body.title, req.body.descr]);
+                                        [req.body.firstName, req.body.lastName, req.body.title, req.body.description]);
 
             res.json(idea);
 

@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
+import API from "../../API";
 
 
 function CreateForm() {
@@ -25,7 +26,9 @@ function CreateForm() {
         description: string;
     }
     
-    function addNew() {
+    async function addNew() {
+
+        console.log("button clicked");
 
         const newIdea: Idea = {
             firstName: firstNameRef.current?.value!,
@@ -34,8 +37,7 @@ function CreateForm() {
             description: descRef.current?.value!
         };
 
-        //call api to add to database here
-
+        await API.addIdea(newIdea);
     }
 
   return (
@@ -106,7 +108,7 @@ function CreateForm() {
                     </div>
                 </Box>
                 <Stack spacing={2} direction="row">
-                    <Button variant="contained" onClick={addNew}>Contained</Button>
+                    <Button variant="contained" onClick={addNew}>Submit</Button>
                 </Stack>
             </div>
         </div>
