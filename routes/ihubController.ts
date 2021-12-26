@@ -5,8 +5,8 @@ module.exports = {
         try {
             console.log(req.body);
 
-            const idea = await db.query("INSERT INTO ideas(firstName, lastName, title, descr) VALUES($1, $2, $3, $4)",
-                                        [req.body.firstName, req.body.lastName, req.body.title, req.body.description]);
+            const idea = await db.query("INSERT INTO ideas(firstName, lastName, email, title, descr) VALUES($1, $2, $3, $4, $5)",
+                                        [req.body.firstName, req.body.lastName, req.body.email, req.body.title, req.body.description]);
 
             res.json(idea);
 
@@ -23,9 +23,24 @@ module.exports = {
             console.log(req.params);
             let parameter = "%" + req.params.searchTerm + "%";
             console.log(parameter);
-            const idea_list = await db.query("SELECT * FROM ideas WHERE ((firstName LIKE $1) OR (lastName LIKE $1) OR (descr LIKE $1))", 
+            const idea_list = await db.query("SELECT * FROM ideas WHERE ((firstName LIKE $1) OR (lastName LIKE $1) OR (descr LIKE $1) OR (title LIKE $1))", 
                                                 [parameter]);
             res.json(idea_list);
+
+        } catch (error) {
+            let message;
+            if (error instanceof Error) message = error.message;
+            else message = String(error);
+            console.log(message);
+            res.json(message);
+        }
+    },
+    checkEmail: async function(req: any, res: any) {
+        try {
+            console.log(req.params);
+            const user_list = await db.query("SELECT * FROM ideas WHERE email = $1", 
+                                                [req.params.email]);
+            res.json(user_list);
 
         } catch (error) {
             let message;

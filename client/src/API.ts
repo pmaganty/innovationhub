@@ -6,6 +6,9 @@ export default {
   },
   readAll: function(newSearch: any) {
     console.log("Inside readall api" + newSearch);
-    return axios.get("/api/ihub/" + newSearch);
+    return axios.get("/api/ihub/search/" + newSearch);
+  },
+  checkEmail: function(email: any) {
+    return axios.get("/api/ihub/email/" + email);
   },
 };

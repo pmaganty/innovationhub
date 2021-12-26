@@ -11,8 +11,11 @@ router.get('/api', (req,res)=>{
 router.route("/api/ihub")
   .post(ihubController.addIdea)
 
-router.route("/api/ihub/:searchTerm")
+router.route("/api/ihub/search/:searchTerm")
   .get(ihubController.readAll);
+
+router.route("/api/ihub/email/:email")
+  .get(ihubController.checkEmail);
 
 // If no API routes are hit, send the React app
 router.use(function(req, res) {

@@ -13,17 +13,20 @@ function CreateForm() {
     const lastNameRef = useRef<HTMLInputElement>();
     const titleRef = useRef<HTMLInputElement>();
     const descRef = useRef<HTMLInputElement>();
+    const emailRef = useRef<HTMLInputElement>();
 
     let firstName = "";
     let lastName = "";
     let title = "";
     let description = "";
+    let email = "";
     
     interface Idea {
         firstName: string;
         lastName: string;
         title: string;
         description: string;
+        email: string;
     }
     
     async function addNew() {
@@ -34,7 +37,8 @@ function CreateForm() {
             firstName: firstNameRef.current?.value!,
             lastName: lastNameRef.current?.value!,
             title: titleRef.current?.value!,
-            description: descRef.current?.value!
+            description: descRef.current?.value!,
+            email: emailRef.current?.value!
         };
 
         await API.addIdea(newIdea);
@@ -85,6 +89,24 @@ function CreateForm() {
                         label="Required"
                         defaultValue="Title"
                         inputRef={titleRef}
+                        />
+                    </div>
+                </Box>
+                <Box
+                component="form"
+                sx={{
+                    '& .MuiTextField-root': { m: 1, width: '25ch' },
+                }}
+                noValidate
+                autoComplete="off"
+                >
+                    <div>
+                        <TextField
+                        required
+                        id="outlined-required"
+                        label="Required"
+                        defaultValue="Email"
+                        inputRef={emailRef}
                         />
                     </div>
                 </Box>
