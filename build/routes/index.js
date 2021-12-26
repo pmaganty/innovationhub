@@ -12,6 +12,8 @@ router.get('/api', function (req, res) {
 });
 router.route("/api/ihub")
     .post(ihubController.addIdea);
+router.route("/api/ihub/:searchTerm")
+    .get(ihubController.readAll);
 // If no API routes are hit, send the React app
 router.use(function (req, res) {
     res.sendFile(path.join(__dirname, "../../client/build/index.html"));

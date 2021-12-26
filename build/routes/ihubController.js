@@ -39,21 +39,13 @@ var db = require("../models/db");
 module.exports = {
     addIdea: function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var firstName, lastName, title, descr, idea, error_1, message;
+            var idea, error_1, message;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
                         console.log(req.body);
-                        firstName = req.body.firstName;
-                        lastName = req.body.lastName;
-                        title = req.body.title;
-                        descr = req.body.descr;
-                        console.log(firstName);
-                        console.log(lastName);
-                        console.log(title);
-                        console.log(descr);
-                        return [4 /*yield*/, db.query("INSERT INTO ideas(firstName, lastName, title, descr) VALUES($1, $2, $3, $4)", [req.body.firstName, req.body.lastName, req.body.title, req.body.descr])];
+                        return [4 /*yield*/, db.query("INSERT INTO ideas(firstName, lastName, title, descr) VALUES($1, $2, $3, $4)", [req.body.firstName, req.body.lastName, req.body.title, req.body.description])];
                     case 1:
                         idea = _a.sent();
                         res.json(idea);
@@ -65,6 +57,36 @@ module.exports = {
                             message = error_1.message;
                         else
                             message = String(error_1);
+                        console.log(message);
+                        res.json(message);
+                        return [3 /*break*/, 3];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    },
+    readAll: function (req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            var parameter, idea_list, error_2, message;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        console.log(req.params);
+                        parameter = "%" + req.params.searchTerm + "%";
+                        console.log(parameter);
+                        return [4 /*yield*/, db.query("SELECT * FROM ideas WHERE ((firstName LIKE $1) OR (lastName LIKE $1) OR (descr LIKE $1))", [parameter])];
+                    case 1:
+                        idea_list = _a.sent();
+                        res.json(idea_list);
+                        return [3 /*break*/, 3];
+                    case 2:
+                        error_2 = _a.sent();
+                        message = void 0;
+                        if (error_2 instanceof Error)
+                            message = error_2.message;
+                        else
+                            message = String(error_2);
                         console.log(message);
                         res.json(message);
                         return [3 /*break*/, 3];
