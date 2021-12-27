@@ -1,4 +1,5 @@
 import React, { useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Header from "../components/Header";
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
@@ -8,6 +9,7 @@ import API from "../API";
 
 
 function Email() {
+    const navigate = useNavigate();
 
     const emailRef = useRef<HTMLInputElement>();
 
@@ -17,9 +19,12 @@ function Email() {
         const idea_list = await API.checkEmail(emailRef.current?.value);
 
         if (idea_list.data.rows.length > 0) {
-            console.log("user exists");
+            navigate("/create");
         } else {
             console.log("new user");
+            const stripeOut = await API.stripeOnboard();
+            console.log(stripeOut.data.url);
+            window.location.href = stripeOut.data.url;
         }
     }
 

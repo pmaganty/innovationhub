@@ -11,4 +11,8 @@ export default {
   checkEmail: function(email: any) {
     return axios.get("/api/ihub/email/" + email);
   },
+  stripeOnboard: function() {
+    console.log("fronend route onboard-user");
+    return axios.post("/onboard-user");
+  },
 };
