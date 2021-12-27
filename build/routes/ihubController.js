@@ -122,5 +122,33 @@ module.exports = {
                 }
             });
         });
+    },
+    getStripeId: function (req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            var idea, error_4, message;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        console.log(req.params);
+                        return [4 /*yield*/, db.query("SELECT * FROM ideas WHERE ideas_id = $1", [req.params.id])];
+                    case 1:
+                        idea = _a.sent();
+                        res.json(idea);
+                        return [3 /*break*/, 3];
+                    case 2:
+                        error_4 = _a.sent();
+                        message = void 0;
+                        if (error_4 instanceof Error)
+                            message = error_4.message;
+                        else
+                            message = String(error_4);
+                        console.log(message);
+                        res.json(message);
+                        return [3 /*break*/, 3];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
     }
 };

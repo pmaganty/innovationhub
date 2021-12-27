@@ -15,4 +15,12 @@ export default {
     console.log("fronend route onboard-user");
     return axios.post("/onboard-user");
   },
+  getStripeId: function(id: any) {
+    console.log("fronend route get stripe id");
+    return axios.get("/api/ihub/stripeId/" + id);
+  },
+  donateMoney: function(newPayment: any) {
+    console.log("fronend route donate money");
+    return axios.post("/create-checkout-session", newPayment);
+  }
 };

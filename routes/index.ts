@@ -35,6 +35,40 @@ router.post("/onboard-user", async (req, res) => {
         res.json(message);
     }
   });
+  
+  router.post('/create-checkout-session', async (req, res) => {
+    console.log("backend create checkout session");
+    const origin = `${req.headers.origin}`;
+
+    console.log(origin);
+  
+    const { amount, stripe_id, title } = req.body;
+
+    console.log(amount);
+    // Create new Checkout Session for the order
+    // For full details see https://stripe.com/docs/api/checkout/sessions/create
+    const session = await stripe.checkout.sessions.create({
+      payment_method_types: ['card'],
+      line_items: [
+        {
+          name: title,
+          quantity: 1,
+          currency: 'USD',
+          amount: amount, // Keep the amount on the server to prevent customers from manipulating on client
+        },
+      ],
+      // ?session_id={CHECKOUT_SESSION_ID} means the redirect will have the session ID set as a query param
+      success_url: `${origin}/`,
+      cancel_url: `${origin}/search`,
+    }, {
+      stripeAccount: stripe_id,
+    });   
+
+    res.send({
+        sessionId: session.id, 
+        url: session.url
+    });
+});   
 
 router.get('/api', (req,res)=>{
     res.send({Id: 5, Name: "Pran"});
@@ -48,6 +82,9 @@ router.route("/api/ihub/search/:searchTerm")
 
 router.route("/api/ihub/email/:email")
   .get(ihubController.checkEmail);
+
+router.route("/api/ihub/stripeId/:id")
+  .get(ihubController.getStripeId);
 
 // If no API routes are hit, send the React app
 router.use(function(req, res) {

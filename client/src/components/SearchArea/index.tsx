@@ -63,6 +63,7 @@ function SearchArea() {
                 <div className="col-sm-12 col-md-6 col-lg-6">
                   {ideas.map( (idea: any) => (
                       <Idea
+                      id = {idea.ideas_id}
                       firstName = {idea.firstName}
                       lastName = {idea.lastName}
                       title = {idea.title}

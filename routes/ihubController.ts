@@ -49,5 +49,20 @@ module.exports = {
             console.log(message);
             res.json(message);
         }
+    },
+    getStripeId: async function(req: any, res: any) {
+        try {
+            console.log(req.params);
+            const idea = await db.query("SELECT * FROM ideas WHERE ideas_id = $1", 
+                                                [req.params.id]);
+            res.json(idea);
+
+        } catch (error) {
+            let message;
+            if (error instanceof Error) message = error.message;
+            else message = String(error);
+            console.log(message);
+            res.json(message);
+        }
     }    
   };

@@ -87,6 +87,42 @@ router.post("/onboard-user", function (req, res) { return __awaiter(void 0, void
         }
     });
 }); });
+router.post('/create-checkout-session', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var origin, _a, amount, stripe_id, title, session;
+    return __generator(this, function (_b) {
+        switch (_b.label) {
+            case 0:
+                console.log("backend create checkout session");
+                origin = "".concat(req.headers.origin);
+                console.log(origin);
+                _a = req.body, amount = _a.amount, stripe_id = _a.stripe_id, title = _a.title;
+                console.log(amount);
+                return [4 /*yield*/, stripe.checkout.sessions.create({
+                        payment_method_types: ['card'],
+                        line_items: [
+                            {
+                                name: title,
+                                quantity: 1,
+                                currency: 'USD',
+                                amount: amount, // Keep the amount on the server to prevent customers from manipulating on client
+                            },
+                        ],
+                        // ?session_id={CHECKOUT_SESSION_ID} means the redirect will have the session ID set as a query param
+                        success_url: "".concat(origin, "/"),
+                        cancel_url: "".concat(origin, "/search"),
+                    }, {
+                        stripeAccount: stripe_id,
+                    })];
+            case 1:
+                session = _b.sent();
+                res.send({
+                    sessionId: session.id,
+                    url: session.url
+                });
+                return [2 /*return*/];
+        }
+    });
+}); });
 router.get('/api', function (req, res) {
     res.send({ Id: 5, Name: "Pran" });
 });
@@ -96,6 +132,8 @@ router.route("/api/ihub/search/:searchTerm")
     .get(ihubController.readAll);
 router.route("/api/ihub/email/:email")
     .get(ihubController.checkEmail);
+router.route("/api/ihub/stripeId/:id")
+    .get(ihubController.getStripeId);
 // If no API routes are hit, send the React app
 router.use(function (req, res) {
     res.sendFile(path.join(__dirname, "../../client/build/index.html"));
