@@ -24,6 +24,7 @@ function Email() {
             console.log("new user");
             const stripeOut = await API.stripeOnboard();
             console.log(stripeOut.data.url);
+            console.log(stripeOut.data.id);
             window.location.href = stripeOut.data.url;
         }
     }

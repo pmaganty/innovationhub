@@ -6,5 +6,6 @@ CREATE TABLE ideas(
     lastName TEXT,
     email TEXT,
     title TEXT,
-    descr TEXT
+    descr TEXT,
+    stripe_id TEXT
 );

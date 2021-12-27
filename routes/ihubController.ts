@@ -5,8 +5,8 @@ module.exports = {
         try {
             console.log(req.body);
 
-            const idea = await db.query("INSERT INTO ideas(firstName, lastName, email, title, descr) VALUES($1, $2, $3, $4, $5)",
-                                        [req.body.firstName, req.body.lastName, req.body.email, req.body.title, req.body.description]);
+            const idea = await db.query("INSERT INTO ideas(firstName, lastName, email, title, descr, stripe_id) VALUES($1, $2, $3, $4, $5, $6)",
+                                        [req.body.firstName, req.body.lastName, req.body.email, req.body.title, req.body.description, req.body.stripe_id]);
 
             res.json(idea);
 

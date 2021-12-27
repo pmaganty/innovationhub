@@ -10,8 +10,8 @@ function generateAccountLink(accountID: any, origin: any) {
       .create({
         type: "account_onboarding",
         account: accountID,
-        refresh_url: `${origin}/email`,
-        return_url: `${origin}/create`
+        refresh_url: `${origin}/create`,
+        return_url: `${origin}/`
       })
       .then((link: any) => link.url);
   }
@@ -26,7 +26,7 @@ router.post("/onboard-user", async (req, res) => {
         //req.session.accountID = account.id;
         const origin = `${req.headers.origin}`;
         const accountLinkURL = await generateAccountLink(account.id, origin);
-        res.send({ url: accountLinkURL });
+        res.send({ url: accountLinkURL, id: account.id });
     } catch (error) {
         let message;
         if (error instanceof Error) message = error.message;

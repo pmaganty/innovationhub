@@ -27,21 +27,30 @@ function CreateForm() {
         title: string;
         description: string;
         email: string;
+        stripe_id: string;
     }
     
     async function addNew() {
 
         console.log("button clicked");
 
+        const stripeOut = await API.stripeOnboard();
+        console.log(stripeOut.data.url);
+        console.log(stripeOut.data.id);
+
         const newIdea: Idea = {
             firstName: firstNameRef.current?.value!,
             lastName: lastNameRef.current?.value!,
             title: titleRef.current?.value!,
             description: descRef.current?.value!,
-            email: emailRef.current?.value!
+            email: emailRef.current?.value!,
+            stripe_id: stripeOut.data.id
         };
 
         await API.addIdea(newIdea);
+
+        window.location.href = stripeOut.data.url;
+        
     }
 
   return (

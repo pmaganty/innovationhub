@@ -49,8 +49,8 @@ function generateAccountLink(accountID, origin) {
         .create({
         type: "account_onboarding",
         account: accountID,
-        refresh_url: "".concat(origin, "/email"),
-        return_url: "".concat(origin, "/create")
+        refresh_url: "".concat(origin, "/create"),
+        return_url: "".concat(origin, "/")
     })
         .then(function (link) { return link.url; });
 }
@@ -71,7 +71,7 @@ router.post("/onboard-user", function (req, res) { return __awaiter(void 0, void
                 return [4 /*yield*/, generateAccountLink(account.id, origin_1)];
             case 2:
                 accountLinkURL = _a.sent();
-                res.send({ url: accountLinkURL });
+                res.send({ url: accountLinkURL, id: account.id });
                 return [3 /*break*/, 4];
             case 3:
                 error_1 = _a.sent();
