@@ -1,3 +1,19 @@
 #outlined-multiline-flexible {
     width: 100%;
 }
+
+#formDiv {
+    margin: 50px;
+}
+
+#submitDiv {
+    margin: auto;
+}
+
+#inputDiv {
+    padding: 20px;
+    border: 2px solid rgb(228, 230, 231);
+    border-radius: 0.5;
+    margin: 20px;
+    background: rgb(239, 242, 243);
+}

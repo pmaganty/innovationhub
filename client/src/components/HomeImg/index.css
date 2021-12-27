@@ -1,3 +1,19 @@
-#main_home_img {
-    background: url('./ihub_img_3.png');
+#topsection {
+    height: 50vh;
+    background-color: #497b94;
+}
+
+#toptext {
+    color: #236d92;
+    font-weight: bold;
+    text-align: center;
+    font-family: 'Questrial', sans-serif;
+    font-size: 5vw;
+    background-color: rgb(233, 234, 235);
+    margin: auto;
+    margin-top: 12vh;
+    width: fit-content;
+    padding: 10px;
+    border: solid 3px rgb(168, 170, 170);
+    box-shadow: 5px 5px 5px grey;
 }

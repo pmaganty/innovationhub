@@ -1,3 +1,41 @@
-.text {
+#description {
+    line-height: 1.6;
+    font-size: 32px;
     text-align: center;
+}
+
+#descDiv {
+    background-color: #c6e8f8;
+    padding-top: 12vh;
+    padding-bottom: 12vh;
+}
+
+#startText {
+    color: white;
+    text-align: center;
+    padding: 50px;
+    font-size: 46px;
+}
+
+#startDiv {
+    background-color: #497b94;
+    margin: auto;
+}
+
+#temp_top {
+    background-color: #c6e8f8;
+    border-top: 2px solid black;
+    margin-bottom: 20px;
+}
+
+#temp_bottom {
+    background-color: #c6e8f8;
+    border-top: 2px solid black;
+    margin-top: 20px;
+}
+
+#buttonDiv {
+    margin: 0 auto;
+    margin-bottom: 30px;
+    display: block;
 }

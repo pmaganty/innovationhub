@@ -5,6 +5,7 @@ import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
 import Button from '@mui/material/Button';
 import API from "../../API";
+import "./index.css";
 
 
 function CreateForm() {
@@ -56,91 +57,98 @@ function CreateForm() {
   return (
     <div>
         <div className="row justify-content-center">
-            <div className="col-sm-12 col-md-8 col-lg-8">
-                <Box
-                component="form"
-                sx={{
-                    '& .MuiTextField-root': { m: 1, width: '25ch' },
-                }}
-                noValidate
-                autoComplete="off"
-                >
-                    <div>
-                        <TextField
-                        required
-                        id="outlined-required"
-                        label="Required"
-                        defaultValue="First Name"
-                        inputRef={firstNameRef}
-                        />
+            <div id="formDiv" className="col-sm-auto col-md-auto col-lg-auto">
+                <div className="row justify-content-center">
+                    <div id="inputDiv" className="col-sm-12 col-md-12 col-lg-12">
+                        <Box
+                        component="form"
+                        sx={{
+                            '& .MuiTextField-root': { m: 1, width: '25ch' },
+                        }}
+                        noValidate
+                        autoComplete="off"
+                        >
+                            <div>
+                                <TextField
+                                required
+                                id="outlined-required"
+                                label="Required"
+                                defaultValue="First Name"
+                                inputRef={firstNameRef}
+                                />
 
-                        <TextField
-                        required
-                        id="outlined-required"
-                        label="Required"
-                        defaultValue="Last Name"
-                        inputRef={lastNameRef}
-                        />
+                                <TextField
+                                required
+                                id="outlined-required"
+                                label="Required"
+                                defaultValue="Last Name"
+                                inputRef={lastNameRef}
+                                />
+                            </div>
+                        </Box>
+                        <Box
+                        component="form"
+                        sx={{
+                            '& .MuiTextField-root': { m: 1, width: '25ch' },
+                        }}
+                        noValidate
+                        autoComplete="off"
+                        >
+                            <div>
+                                <TextField
+                                required
+                                id="outlined-required"
+                                label="Required"
+                                defaultValue="Title"
+                                inputRef={titleRef}
+                                />
+                            </div>
+                        </Box>
+                        <Box
+                        component="form"
+                        sx={{
+                            '& .MuiTextField-root': { m: 1, width: '25ch' },
+                        }}
+                        noValidate
+                        autoComplete="off"
+                        >
+                            <div>
+                                <TextField
+                                required
+                                id="outlined-required"
+                                label="Required"
+                                defaultValue="Email"
+                                inputRef={emailRef}
+                                />
+                            </div>
+                        </Box>
+                        <Box
+                        component="form"
+                        sx={{
+                            '& .MuiTextField-root': { m: 1, width: '75ch' },
+                        }}
+                        noValidate
+                        autoComplete="off"
+                        >
+                            <div>
+                                <TextField
+                                id="outlined-multiline-flexible"
+                                label="Description"
+                                multiline
+                                maxRows={10}
+                                rows={4}
+                                inputRef={descRef}
+                                />
+                            </div>
+                        </Box>
                     </div>
-                </Box>
-                <Box
-                component="form"
-                sx={{
-                    '& .MuiTextField-root': { m: 1, width: '25ch' },
-                }}
-                noValidate
-                autoComplete="off"
-                >
-                    <div>
-                        <TextField
-                        required
-                        id="outlined-required"
-                        label="Required"
-                        defaultValue="Title"
-                        inputRef={titleRef}
-                        />
-                    </div>
-                </Box>
-                <Box
-                component="form"
-                sx={{
-                    '& .MuiTextField-root': { m: 1, width: '25ch' },
-                }}
-                noValidate
-                autoComplete="off"
-                >
-                    <div>
-                        <TextField
-                        required
-                        id="outlined-required"
-                        label="Required"
-                        defaultValue="Email"
-                        inputRef={emailRef}
-                        />
-                    </div>
-                </Box>
-                <Box
-                component="form"
-                sx={{
-                    '& .MuiTextField-root': { m: 1, width: '75ch' },
-                }}
-                noValidate
-                autoComplete="off"
-                >
-                    <div>
-                        <TextField
-                        id="outlined-multiline-flexible"
-                        label="Description"
-                        multiline
-                        maxRows={10}
-                        rows={4}
-                        inputRef={descRef}
-                        />
-                    </div>
-                </Box>
-                <Stack spacing={2} direction="row">
-                    <Button variant="contained" onClick={addNew}>Submit</Button>
-                </Stack>
+                </div>
+                <div id="submitDiv" className="col-sm-auto col-md-auto col-lg-auto">
+                    <Button sx={{
+                        backgroundColor: '#497b94',
+                      }}
+                      variant="contained" onClick={addNew}>Submit</Button>
+                </div>
             </div>
         </div>
     </div>
