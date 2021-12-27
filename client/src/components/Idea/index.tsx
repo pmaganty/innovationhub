@@ -51,7 +51,8 @@ function Idea(props:Idea) {
 
   return (
     <div>
-        <Card sx={{ maxWidth: 345 }}>
+      <section className="col-override col-sm-12 col-md-6 col-lg-6">
+        <Card sx={{ maxWidth: 500, width:  500}}>
           <CardActionArea>
             <CardMedia
               component="img"
@@ -92,6 +93,7 @@ function Idea(props:Idea) {
             </Box>
           </CardActions>
         </Card>
+      </section>
     </div>
   );
 }

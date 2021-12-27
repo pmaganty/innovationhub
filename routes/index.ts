@@ -10,8 +10,8 @@ function generateAccountLink(accountID: any, origin: any) {
       .create({
         type: "account_onboarding",
         account: accountID,
-        refresh_url: `${origin}/create`,
-        return_url: `${origin}/`
+        refresh_url: `${origin}/failedSubmission`,
+        return_url: `${origin}/successfulSubmission`
       })
       .then((link: any) => link.url);
   }
@@ -58,8 +58,8 @@ router.post("/onboard-user", async (req, res) => {
         },
       ],
       // ?session_id={CHECKOUT_SESSION_ID} means the redirect will have the session ID set as a query param
-      success_url: `${origin}/`,
-      cancel_url: `${origin}/search`,
+      success_url: `${origin}/successfulPayment`,
+      cancel_url: `${origin}/failedPayment`,
     }, {
       stripeAccount: stripe_id,
     });   
