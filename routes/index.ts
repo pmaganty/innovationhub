@@ -47,7 +47,7 @@ router.post("/onboard-user", async (req, res) => {
     }
   });
 
-  router.get('/api/ihub/user', (req, res) => {
+  router.get('/user', (req, res) => {
     res.send(req.user);
   });
   
@@ -84,6 +84,8 @@ router.post("/onboard-user", async (req, res) => {
         url: session.url
     });
 });   
+
+
 
 router.get('/api', (req,res)=>{
   res.send({Id: 5, Name: "Pran"});

@@ -7,5 +7,12 @@ CREATE TABLE ideas(
     email TEXT,
     title TEXT,
     descr TEXT,
-    stripe_id TEXT
+    stripe_id TEXT,
+    user_id TEXT REFERENCES users (user_id)
+);
+
+CREATE TABLE users(
+    user_id TEXT PRIMARY KEY,
+    firstName TEXT,
+    lastName TEXT
 );

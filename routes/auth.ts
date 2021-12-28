@@ -1,5 +1,6 @@
 var GoogleStrategy = require('passport-google-oauth20').Strategy;
 const passport = require("passport");
+const ihubController = require("./ihubController");
 
 const GOOGLE_CLIENT_ID = '751940641317-ppl10nn6su6jvdgl848tirqv6d0oa8oo.apps.googleusercontent.com';
 const GOOGLE_CLIENT_SECRET = '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';
@@ -11,6 +12,12 @@ passport.use(new GoogleStrategy({
   },
   function(accessToken: any, refreshToken: any, profile: any, done: any) {
     console.log(profile);
+    const user = ihubController.addUser({ 
+        user_id: profile.id, 
+        firstName: profile.name.givenName, 
+        lastName: profile.name.familyName
+      });
+    console.log(user);
     return done(null, profile);
   }
 ));

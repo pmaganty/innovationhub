@@ -64,5 +64,20 @@ module.exports = {
             console.log(message);
             res.json(message);
         }
-    }    
+    },
+    addUser: async function(userInfo: any) {
+        try {
+            console.log(userInfo);
+            const user = await db.query("INSERT INTO users(user_id, firstName, lastName) VALUES($1, $2, $3) ON CONFLICT (user_id) DO NOTHING",
+                                        [userInfo.user_id, userInfo.firstName, userInfo.lastName]);
+            return user;
+
+        } catch (error) {
+            let message;
+            if (error instanceof Error) message = error.message;
+            else message = String(error);
+            console.log(message);
+            return message;
+        }
+    }     
   };

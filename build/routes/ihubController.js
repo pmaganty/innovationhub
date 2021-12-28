@@ -150,5 +150,31 @@ module.exports = {
                 }
             });
         });
+    },
+    addUser: function (userInfo) {
+        return __awaiter(this, void 0, void 0, function () {
+            var user, error_5, message;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        console.log(userInfo);
+                        return [4 /*yield*/, db.query("INSERT INTO users(user_id, firstName, lastName) VALUES($1, $2, $3) ON CONFLICT (user_id) DO NOTHING", [userInfo.user_id, userInfo.firstName, userInfo.lastName])];
+                    case 1:
+                        user = _a.sent();
+                        return [2 /*return*/, user];
+                    case 2:
+                        error_5 = _a.sent();
+                        message = void 0;
+                        if (error_5 instanceof Error)
+                            message = error_5.message;
+                        else
+                            message = String(error_5);
+                        console.log(message);
+                        return [2 /*return*/, message];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
     }
 };
