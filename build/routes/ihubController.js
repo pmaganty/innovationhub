@@ -45,7 +45,7 @@ module.exports = {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
                         console.log(req.body);
-                        return [4 /*yield*/, db.query("INSERT INTO ideas(firstName, lastName, email, title, descr, stripe_id) VALUES($1, $2, $3, $4, $5, $6)", [req.body.firstName, req.body.lastName, req.body.email, req.body.title, req.body.description, req.body.stripe_id])];
+                        return [4 /*yield*/, db.query("INSERT INTO ideas(firstName, lastName, email, title, descr, stripe_id, user_id) VALUES($1, $2, $3, $4, $5, $6, $7)", [req.body.firstName, req.body.lastName, req.body.email, req.body.title, req.body.description, req.body.stripe_id, req.body.user_id])];
                     case 1:
                         idea = _a.sent();
                         res.json(idea);

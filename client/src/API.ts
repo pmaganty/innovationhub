@@ -29,6 +29,6 @@ export default {
   },
   checkUser: function() {
     console.log("fronend route check user");
-    return axios.post("/user");
+    return axios.get("/user");
   }
 };

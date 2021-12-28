@@ -47,7 +47,8 @@ router.post("/onboard-user", async (req, res) => {
     }
   });
 
-  router.get('/user', (req, res) => {
+  router.get('/user', async (req, res) => {
+    console.log("inside backend user route");
     res.send(req.user);
   });
   

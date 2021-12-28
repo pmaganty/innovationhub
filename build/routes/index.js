@@ -93,9 +93,13 @@ router.post("/onboard-user", function (req, res) { return __awaiter(void 0, void
         }
     });
 }); });
-router.get('/user', function (req, res) {
-    res.send(req.user);
-});
+router.get('/user', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    return __generator(this, function (_a) {
+        console.log("inside backend user route");
+        res.send(req.user);
+        return [2 /*return*/];
+    });
+}); });
 router.post('/create-checkout-session', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var origin, _a, amount, stripe_id, title, session;
     return __generator(this, function (_b) {

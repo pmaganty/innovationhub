@@ -29,6 +29,7 @@ function CreateForm() {
         description: string;
         email: string;
         stripe_id: string;
+        user_id: string;
     }
     
     async function addNew() {
@@ -39,13 +40,17 @@ function CreateForm() {
         console.log(stripeOut.data.url);
         console.log(stripeOut.data.id);
 
+        const curUser = await API.checkUser();
+        console.log(curUser.data.id);
+
         const newIdea: Idea = {
             firstName: firstNameRef.current?.value!,
             lastName: lastNameRef.current?.value!,
             title: titleRef.current?.value!,
             description: descRef.current?.value!,
             email: emailRef.current?.value!,
-            stripe_id: stripeOut.data.id
+            stripe_id: stripeOut.data.id,
+            user_id: curUser.data.id
         };
 
         await API.addIdea(newIdea);
