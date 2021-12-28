@@ -47,8 +47,8 @@ var router = (0, express_1.Router)();
 exports.router = router;
 require("./auth");
 router.get('/auth/google', passport.authenticate('google', { scope: ['email', 'profile'] }));
-router.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/login', session: true }), function (req, res) {
-    res.redirect('/');
+router.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/failedLogin', session: true }), function (req, res) {
+    res.redirect('/home');
 });
 function generateAccountLink(accountID, origin) {
     return stripe.accountLinks

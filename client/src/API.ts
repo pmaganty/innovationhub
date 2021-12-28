@@ -26,5 +26,9 @@ export default {
   createNewUser: function() {
     console.log("fronend route auth");
     return axios.post("/auth/google");
+  },
+  checkUser: function() {
+    console.log("fronend route check user");
+    return axios.post("/api/ihub/user");
   }
 };

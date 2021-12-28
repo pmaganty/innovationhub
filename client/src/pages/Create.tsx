@@ -1,11 +1,11 @@
 import React from 'react';
-import Header from "../components/Header";
 import CreateForm from "../components/CreateForm";
+import HeaderProt from '../components/HeaderProt';
 
 function Create() {
   return (
     <div>
-        <Header />
+        <HeaderProt />
         <CreateForm />
     </div>
   );

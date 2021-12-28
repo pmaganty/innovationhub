@@ -10,6 +10,8 @@ import FailPayment from './pages/FailPayment';
 import SuccessSub from './pages/SuccessSub';
 import FailSub from './pages/FailSub';
 import Login from './pages/Login';
+import HomeProt from './pages/HomeProt';
+import FailLogin from './pages/FailLogin';
 
 function App() {
   return (
@@ -17,6 +19,7 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Home />}/>
+        <Route path="/home" element={<HomeProt />}/>
         <Route path="/create" element={<Create />}/>
         <Route path="/search" element={<Search />}/>
         <Route path="/email" element={<Email />}/>
@@ -24,6 +27,7 @@ function App() {
         <Route path="/failedPayment" element={<FailPayment />}/>
         <Route path="/successfulSubmission" element={<SuccessSub />}/>
         <Route path="/failedSubmission" element={<FailSub />}/>
+        <Route path="/failedLogin" element={<FailLogin />}/>
         <Route path="/login" element={<Login />}/>
       </Routes>
     </BrowserRouter>

@@ -11,9 +11,9 @@ require("./auth");
 router.get('/auth/google', passport.authenticate('google', { scope: ['email', 'profile'] }));
 
 router.get('/auth/google/callback',
-  passport.authenticate('google', { failureRedirect: '/login', session: true }),
+  passport.authenticate('google', { failureRedirect: '/failedLogin', session: true }),
   function (req, res) {
-    res.redirect('/');
+    res.redirect('/home');
   });
 
 function generateAccountLink(accountID: any, origin: any) {
@@ -45,6 +45,10 @@ router.post("/onboard-user", async (req, res) => {
         console.log(message);
         res.json(message);
     }
+  });
+
+  router.get('/api/ihub/user', (req, res) => {
+    res.send(req.user);
   });
   
   router.post('/create-checkout-session', async (req, res) => {

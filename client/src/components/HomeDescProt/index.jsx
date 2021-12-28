@@ -1,14 +1,18 @@
 import React from 'react';
-import "./index.css";
+import "../HomeDesc/index.css";
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import { useNavigate } from 'react-router-dom';
 
-function HomeDesc() {
+function HomeDescProt() {
   const navigate = useNavigate();
 
-  async function navigateToLogin() {
-    navigate("/login");
+  async function navigateToCreate() {
+    navigate("/create");
+  }
+
+  async function navigateToSearch() {
+    navigate("/search");
   }
 
   return (
@@ -52,8 +56,17 @@ function HomeDesc() {
                         margin: '20px',
                         fontSize: '20px',
                       }}
-                      className="homeButton" variant="outlined" href="#outlined-buttons" onClick={navigateToLogin}>
-                        Sign In
+                      className="homeButton" variant="outlined" href="#outlined-buttons" onClick={navigateToCreate}>
+                        Create a new Idea
+                      </Button>
+                      <Button sx={{
+                        color: 'white',
+                        border: '1px solid white',
+                        margin: '20px',
+                        fontSize: '20px'
+                      }} 
+                      className="homeButton" variant="outlined" href="#outlined-buttons" onClick={navigateToSearch}>
+                        Search for Ideas
                       </Button> 
                     </Stack>
                   </div>
@@ -67,4 +80,4 @@ function HomeDesc() {
   );
 }
 
-export default HomeDesc;
+export default HomeDescProt;

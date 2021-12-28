@@ -46,32 +46,6 @@ app.use(passport.session());
 app.use(bodyParser.json());
 app.use(express_1.default.static("client/build"));
 app.use(routes_1.router);
-/*passport.serializeUser((user, done) => {
-    return done(null, user);
-});
-
-passport.deserializeUser((user: any, done: any) => {
-    return done(null, user);
-});
-
-passport.use(new GoogleStrategy({
-    clientID: '751940641317-ppl10nn6su6jvdgl848tirqv6d0oa8oo.apps.googleusercontent.com',
-    clientSecret: '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',
-    callbackURL: '/auth/google/callback'
-    },
-    function(accessToken: any, refreshToken: any, profile: any, cb: any) {
-    //This means authentication is succesful. Add to database.
-    console.log(profile);
-    })
-);
-
-app.get('/auth/google', passport.authenticate('google', { scope: ['profile'] }));
-
-app.get('/auth/google/callback',
-    passport.authenticate('google', { failureRedirect: '/login' }),
-    function(req, res) {
-        res.redirect('/');
-});*/
 // Start the API server
 app.listen(PORT, function () {
     console.log("API Server now listening on PORT ".concat(PORT, "!"));

@@ -1,11 +1,11 @@
 import React from 'react';
-import Header from "../components/Header";
+import HeaderProt from '../components/HeaderProt';
 import SearchArea from "../components/SearchArea";
 
 function Search() {
   return (
     <div>
-        <Header />
+        <HeaderProt />
         <SearchArea />
     </div>
   );
