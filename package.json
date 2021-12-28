@@ -8,8 +8,14 @@
     "start:dev": "cd client && npm run start"
   },
   "dependencies": {
+    "@types/express-session": "^1.17.4",
+    "@types/passport-google-oauth20": "^2.0.11",
+    "dotenv": "^10.0.0",
     "express": "^4.17.2",
+    "express-session": "^1.17.2",
     "npm-run-all": "^4.1.5",
+    "passport": "^0.5.2",
+    "passport-google-oauth20": "^2.0.0",
     "path": "^0.12.7",
     "pg": "^8.7.1",
     "stripe": "^8.195.0"

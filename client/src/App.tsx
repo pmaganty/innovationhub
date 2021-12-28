@@ -9,6 +9,7 @@ import SuccessPayment from './pages/SuccessPayment';
 import FailPayment from './pages/FailPayment';
 import SuccessSub from './pages/SuccessSub';
 import FailSub from './pages/FailSub';
+import Login from './pages/Login';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
         <Route path="/failedPayment" element={<FailPayment />}/>
         <Route path="/successfulSubmission" element={<SuccessSub />}/>
         <Route path="/failedSubmission" element={<FailSub />}/>
+        <Route path="/login" element={<Login />}/>
       </Routes>
     </BrowserRouter>
     </div>

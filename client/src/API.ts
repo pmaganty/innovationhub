@@ -22,5 +22,9 @@ export default {
   donateMoney: function(newPayment: any) {
     console.log("fronend route donate money");
     return axios.post("/create-checkout-session", newPayment);
+  },
+  createNewUser: function() {
+    console.log("fronend route auth");
+    return axios.post("/auth/google");
   }
 };

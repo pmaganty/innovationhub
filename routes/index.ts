@@ -1,9 +1,20 @@
 import { Router } from "express";
+import { appendFile } from "fs";
+const passport = require("passport");
 const path = require("path");
 const stripe = require("stripe")('sk_test_51KAzN1K57oIWPlviEqzrARmSoxhzcFGfb6eDKk8BYQ6BFAJ9SfyvudRZbrtEwqR9i01yBro8Fqv60knWdjieIP0900SMH2KxL6');
 //import ihubController from "../controllers/ihubController";
 const ihubController = require("./ihubController");
 const router =  Router();
+require("./auth");
+
+router.get('/auth/google', passport.authenticate('google', { scope: ['email', 'profile'] }));
+
+router.get('/auth/google/callback',
+  passport.authenticate('google', { failureRedirect: '/login', session: true }),
+  function (req, res) {
+    res.redirect('/');
+  });
 
 function generateAccountLink(accountID: any, origin: any) {
     return stripe.accountLinks
@@ -71,7 +82,7 @@ router.post("/onboard-user", async (req, res) => {
 });   
 
 router.get('/api', (req,res)=>{
-    res.send({Id: 5, Name: "Pran"});
+  res.send({Id: 5, Name: "Pran"});
 });
 
 router.route("/api/ihub")

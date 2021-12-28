@@ -38,19 +38,25 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.router = void 0;
 var express_1 = require("express");
+var passport = require("passport");
 var path = require("path");
 var stripe = require("stripe")('sk_test_51KAzN1K57oIWPlviEqzrARmSoxhzcFGfb6eDKk8BYQ6BFAJ9SfyvudRZbrtEwqR9i01yBro8Fqv60knWdjieIP0900SMH2KxL6');
 //import ihubController from "../controllers/ihubController";
 var ihubController = require("./ihubController");
 var router = (0, express_1.Router)();
 exports.router = router;
+require("./auth");
+router.get('/auth/google', passport.authenticate('google', { scope: ['email', 'profile'] }));
+router.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/login', session: true }), function (req, res) {
+    res.redirect('/');
+});
 function generateAccountLink(accountID, origin) {
     return stripe.accountLinks
         .create({
         type: "account_onboarding",
         account: accountID,
-        refresh_url: "".concat(origin, "/create"),
-        return_url: "".concat(origin, "/")
+        refresh_url: "".concat(origin, "/failedSubmission"),
+        return_url: "".concat(origin, "/successfulSubmission")
     })
         .then(function (link) { return link.url; });
 }
@@ -108,8 +114,8 @@ router.post('/create-checkout-session', function (req, res) { return __awaiter(v
                             },
                         ],
                         // ?session_id={CHECKOUT_SESSION_ID} means the redirect will have the session ID set as a query param
-                        success_url: "".concat(origin, "/"),
-                        cancel_url: "".concat(origin, "/search"),
+                        success_url: "".concat(origin, "/successfulPayment"),
+                        cancel_url: "".concat(origin, "/failedPayment"),
                     }, {
                         stripeAccount: stripe_id,
                     })];
