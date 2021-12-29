@@ -9,6 +9,11 @@ import { Button, CardActionArea, CardActions } from '@mui/material';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import API from "../../API";
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+
 
 interface Idea {
   id: number;
@@ -22,6 +27,10 @@ interface Payment {
   amount: number;
   stripe_id: number;
   title: string;
+}
+
+interface IdeaUpdateInfo {
+  donation: number;
 }
 
 function Idea(props:Idea) {
@@ -43,6 +52,11 @@ function Idea(props:Idea) {
       title: props.title
     };
 
+    const newUpdate: IdeaUpdateInfo = {
+      donation: parseInt(donateRef.current?.value!)
+    };
+
+    const addDonation = await API.updateIdea(newUpdate, currentId);
     const session = await API.donateMoney(newPayment);
     console.log(session);
 
@@ -65,7 +79,20 @@ function Idea(props:Idea) {
                 {props.title}
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                {props.description}
+                <Accordion>
+                  <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel1a-content"
+                    id="panel1a-header"
+                  >
+                    <Typography>Description</Typography>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <Typography>
+                      {props.description}
+                    </Typography>
+                  </AccordionDetails>
+                </Accordion>
               </Typography>
             </CardContent>
           </CardActionArea>

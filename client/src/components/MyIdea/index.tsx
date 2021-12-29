@@ -9,15 +9,25 @@ import { Button, CardActionArea, CardActions } from '@mui/material';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import API from "../../API";
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 
 interface Idea {
   firstName: string;
   lastName: string;
   title: string;
   description: string;
+  donations: number;
 }
 
 function MyIdea(props:Idea) {
+  
+    async function deleteIdea() {
+      console.log("delete button clicked");
+    }
 
   return (
     <div>
@@ -35,9 +45,26 @@ function MyIdea(props:Idea) {
                 {props.title}
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                {props.description}
+                <Accordion>
+                  <AccordionSummary
+                    expandIcon={<ExpandMoreIcon />}
+                    aria-controls="panel1a-content"
+                    id="panel1a-header"
+                  >
+                    <Typography>Description</Typography>
+                  </AccordionSummary>
+                  <AccordionDetails>
+                    <Typography>
+                      {props.description}
+                    </Typography>
+                  </AccordionDetails>
+                </Accordion>
+              </Typography>
+              <Typography gutterBottom variant="h5" component="div">
+                Donations: ${props.donations}
               </Typography>
             </CardContent>
+            <DeleteForeverIcon onClick={deleteIdea}/>
           </CardActionArea>
         </Card>
       </section>

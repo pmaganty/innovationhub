@@ -148,7 +148,8 @@ router.route("/api/ihub/search/:searchTerm")
 router.route("/api/ihub/email/:email")
     .get(ihubController.checkEmail);
 router.route("/api/ihub/stripeId/:id")
-    .get(ihubController.getStripeId);
+    .get(ihubController.getStripeId)
+    .put(ihubController.updateIdea);
 // If no API routes are hit, send the React app
 router.use(function (req, res) {
     res.sendFile(path.join(__dirname, "../../client/build/index.html"));

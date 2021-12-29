@@ -8,7 +8,7 @@ CREATE TABLE ideas(
     title TEXT,
     descr TEXT,
     stripe_id TEXT,
-    donations TEXT,
+    donations NUMERIC DEFAULT 0,
     user_id TEXT REFERENCES users (user_id)
 );
 

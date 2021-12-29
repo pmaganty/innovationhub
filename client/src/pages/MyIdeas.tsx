@@ -12,7 +12,8 @@ function MyIdeas() {
         firstname: string,
         lastname: string,
         title: string,
-        descr: string
+        descr: string,
+        donations: string
     }>
     >([])
 
@@ -45,6 +46,7 @@ function MyIdeas() {
                                     lastName = {idea.lastname}
                                     title = {idea.title}
                                     description= {idea.descr}
+                                    donations= {idea.donations}
                                     />
                                 ))}
                             </div>

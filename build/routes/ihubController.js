@@ -203,5 +203,32 @@ module.exports = {
                 }
             });
         });
+    },
+    updateIdea: function (req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            var idea, error_7, message;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        console.log(req.body);
+                        return [4 /*yield*/, db.query("UPDATE ideas SET donations = donations+$1 WHERE stripe_id = $2", [req.body.donation, req.params.id])];
+                    case 1:
+                        idea = _a.sent();
+                        res.json(idea);
+                        return [3 /*break*/, 3];
+                    case 2:
+                        error_7 = _a.sent();
+                        message = void 0;
+                        if (error_7 instanceof Error)
+                            message = error_7.message;
+                        else
+                            message = String(error_7);
+                        console.log(message);
+                        return [2 /*return*/, message];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
     }
 };

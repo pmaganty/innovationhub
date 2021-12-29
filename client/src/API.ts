@@ -34,5 +34,9 @@ export default {
   readUserIdeas: function(id: any) {
     console.log("fronend route read user ideas");
     return axios.get("/api/ihub/ideas/" + id);
+  },
+  updateIdea: function(info: any, id: any) {
+    console.log("fronend route read user ideas");
+    return axios.put("/api/ihub/stripeId/" + id, info);
   }
 };
