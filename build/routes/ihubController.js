@@ -176,5 +176,32 @@ module.exports = {
                 }
             });
         });
+    },
+    readUserIdeas: function (req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            var ideas, error_6, message;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        console.log(req.params);
+                        return [4 /*yield*/, db.query("SELECT * FROM ideas WHERE user_id = $1", [req.params.user])];
+                    case 1:
+                        ideas = _a.sent();
+                        res.json(ideas);
+                        return [3 /*break*/, 3];
+                    case 2:
+                        error_6 = _a.sent();
+                        message = void 0;
+                        if (error_6 instanceof Error)
+                            message = error_6.message;
+                        else
+                            message = String(error_6);
+                        console.log(message);
+                        return [2 /*return*/, message];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
     }
 };

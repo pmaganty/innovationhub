@@ -12,6 +12,7 @@ import FailSub from './pages/FailSub';
 import Login from './pages/Login';
 import HomeProt from './pages/HomeProt';
 import FailLogin from './pages/FailLogin';
+import MyIdeas from './pages/MyIdeas';
 
 function App() {
   return (
@@ -29,6 +30,7 @@ function App() {
         <Route path="/failedSubmission" element={<FailSub />}/>
         <Route path="/failedLogin" element={<FailLogin />}/>
         <Route path="/login" element={<Login />}/>
+        <Route path="/myIdeas" element={<MyIdeas />}/>
       </Routes>
     </BrowserRouter>
     </div>

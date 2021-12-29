@@ -30,5 +30,9 @@ export default {
   checkUser: function() {
     console.log("fronend route check user");
     return axios.get("/user");
+  },
+  readUserIdeas: function(id: any) {
+    console.log("fronend route read user ideas");
+    return axios.get("/api/ihub/ideas/" + id);
   }
 };

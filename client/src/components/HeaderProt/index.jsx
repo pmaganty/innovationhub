@@ -13,7 +13,7 @@ function HeaderProt() {
             <Nav.Link href="/home">Home</Nav.Link>
             <Nav.Link href="/create">Create</Nav.Link>
             <Nav.Link href="/search">Search</Nav.Link>
-            <Nav.Link href="">My Ideas</Nav.Link>
+            <Nav.Link href="/myIdeas">My Ideas</Nav.Link>
           </Nav>
         </Container>
       </Navbar>

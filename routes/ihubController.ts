@@ -79,5 +79,20 @@ module.exports = {
             console.log(message);
             return message;
         }
-    }     
+    },
+    readUserIdeas: async function(req: any, res: any) {
+        try {
+            console.log(req.params);
+            const ideas = await db.query("SELECT * FROM ideas WHERE user_id = $1",
+                                        [req.params.user]);
+            res.json(ideas);
+
+        } catch (error) {
+            let message;
+            if (error instanceof Error) message = error.message;
+            else message = String(error);
+            console.log(message);
+            return message;
+        }
+    }      
   };
