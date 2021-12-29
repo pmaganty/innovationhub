@@ -11,7 +11,7 @@ function FailPayment() {
     const navigate = useNavigate();
 
     async function navigateToHome() {
-        navigate("/");
+        navigate("/home");
     }
 
     return (

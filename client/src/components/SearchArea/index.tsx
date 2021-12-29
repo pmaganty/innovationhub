@@ -35,11 +35,13 @@ function SearchArea() {
       searchTerm: searchRef.current?.value!,
     };
 
-    let temp_ideas = await API.readAll(searchRef.current?.value);   
+    if (searchTerm != null || searchTerm != "") {
+      let temp_ideas = await API.readAll(searchRef.current?.value.toLowerCase());   
 
-    console.log(temp_ideas.data.rows);
+      console.log(temp_ideas.data.rows);
 
-    setIdeas(temp_ideas.data.rows);
+      setIdeas(temp_ideas.data.rows);
+    }
     
   }
 

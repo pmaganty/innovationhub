@@ -77,7 +77,7 @@ router.post("/onboard-user", function (req, res) { return __awaiter(void 0, void
                 return [4 /*yield*/, generateAccountLink(account.id, origin_1)];
             case 2:
                 accountLinkURL = _a.sent();
-                res.send({ url: accountLinkURL, id: account.id });
+                res.send({ url: accountLinkURL, id: account.id, update: account.updated });
                 return [3 /*break*/, 4];
             case 3:
                 error_1 = _a.sent();

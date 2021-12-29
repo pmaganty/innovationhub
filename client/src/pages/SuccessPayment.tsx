@@ -10,7 +10,7 @@ function SuccessPayment() {
   const navigate = useNavigate();
 
   async function navigateToHome() {
-      navigate("/");
+      navigate("/home");
   }
 
   return (
