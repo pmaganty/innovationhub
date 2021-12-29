@@ -50,13 +50,13 @@ router.get('/auth/google', passport.authenticate('google', { scope: ['email', 'p
 router.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/failedLogin', session: true }), function (req, res) {
     res.redirect('/home');
 });
-function generateAccountLink(accountID, origin) {
+function generateAccountLink(accountID, origin, idea_id) {
     return stripe.accountLinks
         .create({
         type: "account_onboarding",
         account: accountID,
-        refresh_url: "".concat(origin, "/failedSubmission"),
-        return_url: "".concat(origin, "/successfulSubmission")
+        refresh_url: "".concat(origin, "/checkSubmission?account_id=").concat(accountID, "&idea_id=").concat(idea_id),
+        return_url: "".concat(origin, "/checkSubmission?account_id=").concat(accountID, "&idea_id=").concat(idea_id)
     })
         .then(function (link) { return link.url; });
 }
@@ -69,12 +69,13 @@ router.post("/onboard-user", function (req, res) { return __awaiter(void 0, void
                 console.log("inside back end onboard user route");
                 return [4 /*yield*/, stripe.accounts.create({
                         type: "standard",
-                        business_type: 'individual'
+                        business_type: 'individual',
+                        email: req.body.email
                     })];
             case 1:
                 account = _a.sent();
                 origin_1 = "".concat(req.headers.origin);
-                return [4 /*yield*/, generateAccountLink(account.id, origin_1)];
+                return [4 /*yield*/, generateAccountLink(account.id, origin_1, req.body.id)];
             case 2:
                 accountLinkURL = _a.sent();
                 res.send({ url: accountLinkURL, id: account.id });
@@ -90,6 +91,33 @@ router.post("/onboard-user", function (req, res) { return __awaiter(void 0, void
                 res.json(message);
                 return [3 /*break*/, 4];
             case 4: return [2 /*return*/];
+        }
+    });
+}); });
+router.get("/stripeAccount/:id", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
+    var account, error_2, message;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                console.log("inside back end check stripe account route");
+                return [4 /*yield*/, stripe.accounts.retrieve(req.params.id)];
+            case 1:
+                account = _a.sent();
+                console.log(account);
+                res.send(account);
+                return [3 /*break*/, 3];
+            case 2:
+                error_2 = _a.sent();
+                message = void 0;
+                if (error_2 instanceof Error)
+                    message = error_2.message;
+                else
+                    message = String(error_2);
+                console.log(message);
+                res.json(message);
+                return [3 /*break*/, 3];
+            case 3: return [2 /*return*/];
         }
     });
 }); });
@@ -140,7 +168,8 @@ router.get('/api', function (req, res) {
     res.send({ Id: 5, Name: "Pran" });
 });
 router.route("/api/ihub")
-    .post(ihubController.addIdea);
+    .post(ihubController.addIdea)
+    .put(ihubController.updateIdeaStripeID);
 router.route("/api/ihub/ideas/:user")
     .get(ihubController.readUserIdeas)
     .delete(ihubController.deleteIdea);

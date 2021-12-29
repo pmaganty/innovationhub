@@ -45,9 +45,10 @@ module.exports = {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
                         console.log(req.body);
-                        return [4 /*yield*/, db.query("INSERT INTO ideas(firstName, lastName, email, title, descr, stripe_id, user_id) VALUES($1, $2, $3, $4, $5, $6, $7)", [req.body.firstName, req.body.lastName, req.body.email, req.body.title, req.body.description, req.body.stripe_id, req.body.user_id])];
+                        return [4 /*yield*/, db.query("INSERT INTO ideas(firstName, lastName, email, title, descr, user_id) VALUES($1, $2, $3, $4, $5, $6) RETURNING ideas_id", [req.body.firstName, req.body.lastName, req.body.email, req.body.title, req.body.description, req.body.user_id])];
                     case 1:
                         idea = _a.sent();
+                        console.log(idea);
                         res.json(idea);
                         return [3 /*break*/, 3];
                     case 2:
@@ -65,20 +66,18 @@ module.exports = {
             });
         });
     },
-    readAll: function (req, res) {
+    updateIdeaStripeID: function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var parameter, idea_list, error_2, message;
+            var idea, error_2, message;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        console.log(req.params);
-                        parameter = "%" + req.params.searchTerm + "%";
-                        console.log(parameter);
-                        return [4 /*yield*/, db.query("SELECT * FROM ideas WHERE ((LOWER(firstName) LIKE LOWER($1)) OR (LOWER(lastName) LIKE LOWER($1)) OR (LOWER(descr) LIKE LOWER($1)) OR (LOWER(title) LIKE LOWER($1)))", [parameter])];
+                        console.log(req.body);
+                        return [4 /*yield*/, db.query("UPDATE ideas SET stripe_id = $1 WHERE ideas_id = $2", [req.body.stripe_id, req.body.ideas_id])];
                     case 1:
-                        idea_list = _a.sent();
-                        res.json(idea_list);
+                        idea = _a.sent();
+                        res.json(idea);
                         return [3 /*break*/, 3];
                     case 2:
                         error_2 = _a.sent();
@@ -95,18 +94,20 @@ module.exports = {
             });
         });
     },
-    checkEmail: function (req, res) {
+    readAll: function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var user_list, error_3, message;
+            var parameter, idea_list, error_3, message;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
                         console.log(req.params);
-                        return [4 /*yield*/, db.query("SELECT * FROM ideas WHERE email = $1", [req.params.email])];
+                        parameter = "%" + req.params.searchTerm + "%";
+                        console.log(parameter);
+                        return [4 /*yield*/, db.query("SELECT * FROM ideas WHERE ((LOWER(firstName) LIKE LOWER($1)) OR (LOWER(lastName) LIKE LOWER($1)) OR (LOWER(descr) LIKE LOWER($1)) OR (LOWER(title) LIKE LOWER($1)))", [parameter])];
                     case 1:
-                        user_list = _a.sent();
-                        res.json(user_list);
+                        idea_list = _a.sent();
+                        res.json(idea_list);
                         return [3 /*break*/, 3];
                     case 2:
                         error_3 = _a.sent();
@@ -123,18 +124,18 @@ module.exports = {
             });
         });
     },
-    getStripeId: function (req, res) {
+    checkEmail: function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var idea, error_4, message;
+            var user_list, error_4, message;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
                         console.log(req.params);
-                        return [4 /*yield*/, db.query("SELECT * FROM ideas WHERE ideas_id = $1", [req.params.id])];
+                        return [4 /*yield*/, db.query("SELECT * FROM ideas WHERE email = $1", [req.params.email])];
                     case 1:
-                        idea = _a.sent();
-                        res.json(idea);
+                        user_list = _a.sent();
+                        res.json(user_list);
                         return [3 /*break*/, 3];
                     case 2:
                         error_4 = _a.sent();
@@ -151,9 +152,37 @@ module.exports = {
             });
         });
     },
+    getStripeId: function (req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            var idea, error_5, message;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        console.log(req.params);
+                        return [4 /*yield*/, db.query("SELECT * FROM ideas WHERE ideas_id = $1", [req.params.id])];
+                    case 1:
+                        idea = _a.sent();
+                        res.json(idea);
+                        return [3 /*break*/, 3];
+                    case 2:
+                        error_5 = _a.sent();
+                        message = void 0;
+                        if (error_5 instanceof Error)
+                            message = error_5.message;
+                        else
+                            message = String(error_5);
+                        console.log(message);
+                        res.json(message);
+                        return [3 /*break*/, 3];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    },
     addUser: function (userInfo) {
         return __awaiter(this, void 0, void 0, function () {
-            var user, error_5, message;
+            var user, error_6, message;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
@@ -163,33 +192,6 @@ module.exports = {
                     case 1:
                         user = _a.sent();
                         return [2 /*return*/, user];
-                    case 2:
-                        error_5 = _a.sent();
-                        message = void 0;
-                        if (error_5 instanceof Error)
-                            message = error_5.message;
-                        else
-                            message = String(error_5);
-                        console.log(message);
-                        return [2 /*return*/, message];
-                    case 3: return [2 /*return*/];
-                }
-            });
-        });
-    },
-    readUserIdeas: function (req, res) {
-        return __awaiter(this, void 0, void 0, function () {
-            var ideas, error_6, message;
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        _a.trys.push([0, 2, , 3]);
-                        console.log(req.params);
-                        return [4 /*yield*/, db.query("SELECT * FROM ideas WHERE user_id = $1", [req.params.user])];
-                    case 1:
-                        ideas = _a.sent();
-                        res.json(ideas);
-                        return [3 /*break*/, 3];
                     case 2:
                         error_6 = _a.sent();
                         message = void 0;
@@ -204,18 +206,18 @@ module.exports = {
             });
         });
     },
-    updateIdea: function (req, res) {
+    readUserIdeas: function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var idea, error_7, message;
+            var ideas, error_7, message;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        console.log(req.body);
-                        return [4 /*yield*/, db.query("UPDATE ideas SET donations = donations+$1, lastDonated = $1 WHERE stripe_id = $2", [req.body.donation, req.params.id])];
+                        console.log(req.params);
+                        return [4 /*yield*/, db.query("SELECT * FROM ideas WHERE user_id = $1", [req.params.user])];
                     case 1:
-                        idea = _a.sent();
-                        res.json(idea);
+                        ideas = _a.sent();
+                        res.json(ideas);
                         return [3 /*break*/, 3];
                     case 2:
                         error_7 = _a.sent();
@@ -231,18 +233,18 @@ module.exports = {
             });
         });
     },
-    deleteIdea: function (req, res) {
+    updateIdea: function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var ideas, error_8, message;
+            var idea, error_8, message;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        console.log(req.params);
-                        return [4 /*yield*/, db.query("DELETE FROM ideas WHERE ideas_id = $1 RETURNING *", [req.params.user])];
+                        console.log(req.body);
+                        return [4 /*yield*/, db.query("UPDATE ideas SET donations = donations+$1, lastDonated = $1 WHERE stripe_id = $2", [req.body.donation, req.params.id])];
                     case 1:
-                        ideas = _a.sent();
-                        res.json(ideas);
+                        idea = _a.sent();
+                        res.json(idea);
                         return [3 /*break*/, 3];
                     case 2:
                         error_8 = _a.sent();
@@ -258,17 +260,18 @@ module.exports = {
             });
         });
     },
-    deleteInvalidIdea: function (req, res) {
+    deleteIdea: function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
-            var idea, error_9, message;
+            var ideas, error_9, message;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, db.query("DELETE FROM ideas WHERE ideas_id = (SELECT MAX(ideas_id) FROM ideas)")];
+                        console.log(req.params);
+                        return [4 /*yield*/, db.query("DELETE FROM ideas WHERE ideas_id = $1 RETURNING *", [req.params.user])];
                     case 1:
-                        idea = _a.sent();
-                        res.json(idea);
+                        ideas = _a.sent();
+                        res.json(ideas);
                         return [3 /*break*/, 3];
                     case 2:
                         error_9 = _a.sent();
@@ -284,14 +287,14 @@ module.exports = {
             });
         });
     },
-    deleteInvalidDonation: function (req, res) {
+    deleteInvalidIdea: function (req, res) {
         return __awaiter(this, void 0, void 0, function () {
             var idea, error_10, message;
             return __generator(this, function (_a) {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, db.query("UPDATE ideas SET donations = donations-lastDonated WHERE ideas_id = (SELECT MAX(ideas_id) FROM ideas)")];
+                        return [4 /*yield*/, db.query("DELETE FROM ideas WHERE ideas_id = (SELECT MAX(ideas_id) FROM ideas)")];
                     case 1:
                         idea = _a.sent();
                         res.json(idea);
@@ -303,6 +306,32 @@ module.exports = {
                             message = error_10.message;
                         else
                             message = String(error_10);
+                        console.log(message);
+                        return [2 /*return*/, message];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
+    },
+    deleteInvalidDonation: function (req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            var idea, error_11, message;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        return [4 /*yield*/, db.query("UPDATE ideas SET donations = donations-lastDonated WHERE ideas_id = (SELECT MAX(ideas_id) FROM ideas)")];
+                    case 1:
+                        idea = _a.sent();
+                        res.json(idea);
+                        return [3 /*break*/, 3];
+                    case 2:
+                        error_11 = _a.sent();
+                        message = void 0;
+                        if (error_11 instanceof Error)
+                            message = error_11.message;
+                        else
+                            message = String(error_11);
                         console.log(message);
                         return [2 /*return*/, message];
                     case 3: return [2 /*return*/];

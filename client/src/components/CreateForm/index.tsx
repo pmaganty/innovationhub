@@ -28,17 +28,16 @@ function CreateForm() {
         title: string;
         description: string;
         email: string;
-        stripe_id: string;
         user_id: string;
+    }
+
+    interface Stripe_ID {
+        stripe_id: string;
     }
     
     async function addNew() {
 
         console.log("button clicked");
-
-        const stripeOut = await API.stripeOnboard();
-        console.log(stripeOut.data.url);
-        console.log(stripeOut.data.id);
 
         const curUser = await API.checkUser();
         console.log(curUser.data.id);
@@ -49,11 +48,15 @@ function CreateForm() {
             title: titleRef.current?.value!,
             description: descRef.current?.value!,
             email: emailRef.current?.value!,
-            stripe_id: stripeOut.data.id,
             user_id: curUser.data.id
         };
 
-        await API.addIdea(newIdea);
+        const idea = await API.addIdea(newIdea);
+        console.log(idea.data.rows[0].ideas_id);
+
+        const stripeOut = await API.stripeOnboard({email: emailRef.current?.value!, id: idea.data.rows[0].ideas_id});
+        console.log(stripeOut.data.url);
+        console.log(stripeOut.data.id);
 
         window.location.href = stripeOut.data.url;
         

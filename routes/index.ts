@@ -16,13 +16,13 @@ router.get('/auth/google/callback',
     res.redirect('/home');
   });
 
-function generateAccountLink(accountID: any, origin: any) {
+function generateAccountLink(accountID: any, origin: any, idea_id: any) {
     return stripe.accountLinks
       .create({
         type: "account_onboarding",
         account: accountID,
-        refresh_url: `${origin}/failedSubmission`,
-        return_url: `${origin}/successfulSubmission`
+        refresh_url: `${origin}/checkSubmission?account_id=${accountID}&idea_id=${idea_id}`,
+        return_url: `${origin}/checkSubmission?account_id=${accountID}&idea_id=${idea_id}`
       })
       .then((link: any) => link.url);
   }
@@ -32,12 +32,28 @@ router.post("/onboard-user", async (req, res) => {
         console.log("inside back end onboard user route");
         const account = await stripe.accounts.create({
             type: "standard",
-            business_type: 'individual'
+            business_type: 'individual',
+            email: req.body.email
         });
         //req.session.accountID = account.id;
         const origin = `${req.headers.origin}`;
-        const accountLinkURL = await generateAccountLink(account.id, origin);
+        const accountLinkURL = await generateAccountLink(account.id, origin, req.body.id);
         res.send({ url: accountLinkURL, id: account.id });
+    } catch (error) {
+        let message;
+        if (error instanceof Error) message = error.message;
+        else message = String(error);
+        console.log(message);
+        res.json(message);
+    }
+  });
+
+  router.get("/stripeAccount/:id", async (req, res) => {
+    try {
+        console.log("inside back end check stripe account route");
+        const account = await stripe.accounts.retrieve(req.params.id);
+        console.log(account);
+        res.send(account);
     } catch (error) {
         let message;
         if (error instanceof Error) message = error.message;
@@ -94,6 +110,7 @@ router.get('/api', (req,res)=>{
 
 router.route("/api/ihub")
   .post(ihubController.addIdea)
+  .put(ihubController.updateIdeaStripeID);
 
 router.route("/api/ihub/ideas/:user")
   .get(ihubController.readUserIdeas)

@@ -15,7 +15,7 @@ function FailSub() {
       navigate("/home");
   }
 
-  async function deleteLastEntry() {
+  /*async function deleteLastEntry() {
     const deleted = await API.deleteInvalidIdea();
 
     console.log(deleted);
@@ -23,7 +23,7 @@ function FailSub() {
 
   useEffect(() => {
     deleteLastEntry();
-  }, []);
+  }, []);*/
 
   return (
     <div>

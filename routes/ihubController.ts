@@ -5,8 +5,26 @@ module.exports = {
         try {
             console.log(req.body);
 
-            const idea = await db.query("INSERT INTO ideas(firstName, lastName, email, title, descr, stripe_id, user_id) VALUES($1, $2, $3, $4, $5, $6, $7)",
-                                        [req.body.firstName, req.body.lastName, req.body.email, req.body.title, req.body.description, req.body.stripe_id, req.body.user_id]);
+            const idea = await db.query("INSERT INTO ideas(firstName, lastName, email, title, descr, user_id) VALUES($1, $2, $3, $4, $5, $6) RETURNING ideas_id",
+                                        [req.body.firstName, req.body.lastName, req.body.email, req.body.title, req.body.description, req.body.user_id]);
+
+            console.log(idea);
+            res.json(idea);
+
+        } catch (error) {
+            let message;
+            if (error instanceof Error) message = error.message;
+            else message = String(error);
+            console.log(message);
+            res.json(message);
+        }
+    },
+    updateIdeaStripeID: async function(req: any, res: any) {
+        try {
+            console.log(req.body);
+
+            const idea = await db.query("UPDATE ideas SET stripe_id = $1 WHERE ideas_id = $2",
+                                        [req.body.stripe_id, req.body.ideas_id]);
 
             res.json(idea);
 

@@ -4,6 +4,9 @@ export default {
   addIdea: function(idea: any) {
     return axios.post("/api/ihub", idea);
   },
+  updateIdeaStripeID: function(info: any) {
+    return axios.put("/api/ihub", info);
+  },
   readAll: function(newSearch: any) {
     console.log("Inside readall api" + newSearch);
     return axios.get("/api/ihub/search/" + newSearch);
@@ -11,9 +14,13 @@ export default {
   checkEmail: function(email: any) {
     return axios.get("/api/ihub/email/" + email);
   },
-  stripeOnboard: function() {
+  stripeOnboard: function(info: any) {
     console.log("fronend route onboard-user");
-    return axios.post("/onboard-user");
+    return axios.post("/onboard-user", info);
+  },
+  checkStripeAccount: function(id: any) {
+    console.log("fronend route check stripe account");
+    return axios.get("/stripeAccount/" + id);
   },
   getStripeId: function(id: any) {
     console.log("fronend route get stripe id");
