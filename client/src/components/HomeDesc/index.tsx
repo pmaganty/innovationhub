@@ -2,14 +2,8 @@ import React from 'react';
 import "./index.css";
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
-import { useNavigate } from 'react-router-dom';
 
 function HomeDesc() {
-  const navigate = useNavigate();
-
-  async function navigateToLogin() {
-    navigate("/login");
-  }
 
   return (
     <div>
@@ -52,7 +46,7 @@ function HomeDesc() {
                         margin: '20px',
                         fontSize: '20px',
                       }}
-                      className="homeButton" variant="outlined" href="#outlined-buttons" onClick={navigateToLogin}>
+                      className="homeButton" variant="outlined" href="/auth/google">
                         Sign In
                       </Button> 
                     </Stack>

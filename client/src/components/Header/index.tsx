@@ -11,7 +11,7 @@ function Header() {
         <Navbar.Brand href="/">IHub</Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link href="/">Home</Nav.Link>
-            <Nav.Link href="/login">Sign In</Nav.Link>
+            <Nav.Link href="/auth/google">Sign In</Nav.Link>
           </Nav>
         </Container>
       </Navbar>

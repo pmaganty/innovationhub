@@ -3,15 +3,14 @@ import Header from "../components/Header";
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import API from "../API";
+import LoginForm from '../components/LoginForm';
 
 function Login() {
 
     return (
         <div>
             <Header />
-            <Stack spacing={2} direction="row">
-                <Button variant="contained" href="/auth/google">Login</Button>
-            </Stack>
+            <LoginForm />
         </div>
     );
 }

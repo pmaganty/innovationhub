@@ -35,14 +35,21 @@ function SearchArea() {
       searchTerm: searchRef.current?.value!,
     };
 
-    if (searchTerm != null || searchTerm != "") {
-      let temp_ideas = await API.readAll(searchRef.current?.value.toLowerCase());   
+
+    console.log(searchRef.current?.value!);
+
+    if (searchRef.current?.value) {
+      console.log("search ref exists");
+
+      let temp_ideas = await API.readAll(searchRef.current?.value);   
 
       console.log(temp_ideas.data.rows);
 
       setIdeas(temp_ideas.data.rows);
+    } else {
+      setIdeas([]);
     }
-    
+
   }
 
   return (

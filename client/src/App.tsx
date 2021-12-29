@@ -29,7 +29,6 @@ function App() {
         <Route path="/successfulSubmission" element={<SuccessSub />}/>
         <Route path="/failedSubmission" element={<FailSub />}/>
         <Route path="/failedLogin" element={<FailLogin />}/>
-        <Route path="/login" element={<Login />}/>
         <Route path="/myIdeas" element={<MyIdeas />}/>
       </Routes>
     </BrowserRouter>

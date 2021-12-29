@@ -23,7 +23,7 @@ module.exports = {
             console.log(req.params);
             let parameter = "%" + req.params.searchTerm + "%";
             console.log(parameter);
-            const idea_list = await db.query("SELECT * FROM ideas WHERE ((firstName LIKE $1) OR (lastName LIKE $1) OR (descr LIKE $1) OR (title LIKE $1))", 
+            const idea_list = await db.query("SELECT * FROM ideas WHERE ((LOWER(firstName) LIKE LOWER($1)) OR (LOWER(lastName) LIKE LOWER($1)) OR (LOWER(descr) LIKE LOWER($1)) OR (LOWER(title) LIKE LOWER($1)))", 
                                                 [parameter]);
             res.json(idea_list);
 
