@@ -144,6 +144,10 @@ router.route("/api/ihub")
 router.route("/api/ihub/ideas/:user")
     .get(ihubController.readUserIdeas)
     .delete(ihubController.deleteIdea);
+router.route("/api/ihub/ideas/payment/invalid")
+    .delete(ihubController.deleteInvalidIdea);
+router.route("/api/ihub/donations/invalid")
+    .delete(ihubController.deleteInvalidDonation);
 router.route("/api/ihub/search/:searchTerm")
     .get(ihubController.readAll);
 router.route("/api/ihub/email/:email")

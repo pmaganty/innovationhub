@@ -9,6 +9,7 @@ CREATE TABLE ideas(
     descr TEXT,
     stripe_id TEXT,
     donations NUMERIC DEFAULT 0,
+    lastDonated NUMERIC DEFAULT 0,
     user_id TEXT REFERENCES users (user_id)
 );
 

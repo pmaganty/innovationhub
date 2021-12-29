@@ -98,7 +98,7 @@ module.exports = {
     updateIdea: async function(req: any, res: any) {
         try {
             console.log(req.body);
-            const idea = await db.query("UPDATE ideas SET donations = donations+$1 WHERE stripe_id = $2",
+            const idea = await db.query("UPDATE ideas SET donations = donations+$1, lastDonated = $1 WHERE stripe_id = $2",
                                         [req.body.donation, req.params.id]);
             res.json(idea);
 
@@ -124,5 +124,31 @@ module.exports = {
             console.log(message);
             return message;
         }
-    }           
+    }, 
+    deleteInvalidIdea: async function(req: any, res: any) {
+        try {
+            const idea = await db.query("DELETE FROM ideas WHERE ideas_id = (SELECT MAX(ideas_id) FROM ideas)");
+            res.json(idea);
+
+        } catch (error) {
+            let message;
+            if (error instanceof Error) message = error.message;
+            else message = String(error);
+            console.log(message);
+            return message;
+        }
+    },    
+    deleteInvalidDonation: async function(req: any, res: any) {
+        try {
+            const idea = await db.query("UPDATE ideas SET donations = donations-lastDonated WHERE ideas_id = (SELECT MAX(ideas_id) FROM ideas)");
+            res.json(idea);
+
+        } catch (error) {
+            let message;
+            if (error instanceof Error) message = error.message;
+            else message = String(error);
+            console.log(message);
+            return message;
+        }
+    }      
   };

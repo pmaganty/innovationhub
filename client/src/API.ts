@@ -42,5 +42,13 @@ export default {
   deleteIdea: function(id: any) {
     console.log("fronend route delete ideas");
     return axios.delete("/api/ihub/ideas/" + id);
+  },
+  deleteInvalidIdea: function() {
+    console.log("fronend route delete invalid ideas");
+    return axios.delete("/api/ihub/ideas/payment/invalid");
+  },
+  deleteInvalidDonation: function() {
+    console.log("fronend route delete invalid donation");
+    return axios.delete("/api/ihub/donations/invalid");
   }
 };
