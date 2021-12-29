@@ -230,5 +230,32 @@ module.exports = {
                 }
             });
         });
+    },
+    deleteIdea: function (req, res) {
+        return __awaiter(this, void 0, void 0, function () {
+            var ideas, error_8, message;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        _a.trys.push([0, 2, , 3]);
+                        console.log(req.params);
+                        return [4 /*yield*/, db.query("DELETE FROM ideas WHERE ideas_id = $1 RETURNING *", [req.params.user])];
+                    case 1:
+                        ideas = _a.sent();
+                        res.json(ideas);
+                        return [3 /*break*/, 3];
+                    case 2:
+                        error_8 = _a.sent();
+                        message = void 0;
+                        if (error_8 instanceof Error)
+                            message = error_8.message;
+                        else
+                            message = String(error_8);
+                        console.log(message);
+                        return [2 /*return*/, message];
+                    case 3: return [2 /*return*/];
+                }
+            });
+        });
     }
 };

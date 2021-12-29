@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useContext, createContext } from 'react';
 import "../Idea/index.css";
 import { Col, Row, Container } from "react-bootstrap";
 import Card from '@mui/material/Card';
@@ -13,9 +13,10 @@ import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
+import ClearIcon from '@mui/icons-material/Clear';
 
 interface Idea {
+  id: number;
   firstName: string;
   lastName: string;
   title: string;
@@ -24,10 +25,6 @@ interface Idea {
 }
 
 function MyIdea(props:Idea) {
-  
-    async function deleteIdea() {
-      console.log("delete button clicked");
-    }
 
   return (
     <div>
@@ -64,7 +61,6 @@ function MyIdea(props:Idea) {
                 Donations: ${props.donations}
               </Typography>
             </CardContent>
-            <DeleteForeverIcon onClick={deleteIdea}/>
           </CardActionArea>
         </Card>
       </section>

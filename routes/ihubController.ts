@@ -109,5 +109,20 @@ module.exports = {
             console.log(message);
             return message;
         }
-    }        
+    },
+    deleteIdea: async function(req: any, res: any) {
+        try {
+            console.log(req.params);
+            const ideas = await db.query("DELETE FROM ideas WHERE ideas_id = $1 RETURNING *",
+                                        [req.params.user]);
+            res.json(ideas);
+
+        } catch (error) {
+            let message;
+            if (error instanceof Error) message = error.message;
+            else message = String(error);
+            console.log(message);
+            return message;
+        }
+    }           
   };
