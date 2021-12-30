@@ -3,7 +3,10 @@ const db = require("../models/db");
 module.exports = {
     addIdea: async function(req: any, res: any) {
         try {
+            console.log("inside add idea back end");
             console.log(req.body);
+
+            console.log(process.env.DATABASE_URL);
 
             const idea = await db.query("INSERT INTO ideas(firstName, lastName, email, title, descr, user_id) VALUES($1, $2, $3, $4, $5, $6) RETURNING ideas_id",
                                         [req.body.firstName, req.body.lastName, req.body.email, req.body.title, req.body.description, req.body.user_id]);
@@ -85,16 +88,21 @@ module.exports = {
     },
     addUser: async function(userInfo: any) {
         try {
+            console.log("inside add user function back end");
             console.log(userInfo);
+            console.log(process.env.DATABASE_URL);
             const user = await db.query("INSERT INTO users(user_id, firstName, lastName) VALUES($1, $2, $3) ON CONFLICT (user_id) DO NOTHING",
                                         [userInfo.user_id, userInfo.firstName, userInfo.lastName]);
+
+            console.log("made it past query");
+            console.log(user);
             return user;
 
         } catch (error) {
             let message;
             if (error instanceof Error) message = error.message;
             else message = String(error);
-            console.log(message);
+            console.log("Error:" + message);
             return message;
         }
     },
@@ -109,7 +117,7 @@ module.exports = {
             let message;
             if (error instanceof Error) message = error.message;
             else message = String(error);
-            console.log(message);
+            console.log("Err: " + message);
             return message;
         }
     },
@@ -158,6 +166,7 @@ module.exports = {
     },    
     deleteInvalidDonation: async function(req: any, res: any) {
         try {
+
             const idea = await db.query("UPDATE ideas SET donations = donations-lastDonated WHERE ideas_id = (SELECT MAX(ideas_id) FROM ideas)");
             res.json(idea);
 

@@ -44,7 +44,9 @@ module.exports = {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
+                        console.log("inside add idea back end");
                         console.log(req.body);
+                        console.log(process.env.DATABASE_URL);
                         return [4 /*yield*/, db.query("INSERT INTO ideas(firstName, lastName, email, title, descr, user_id) VALUES($1, $2, $3, $4, $5, $6) RETURNING ideas_id", [req.body.firstName, req.body.lastName, req.body.email, req.body.title, req.body.description, req.body.user_id])];
                     case 1:
                         idea = _a.sent();
@@ -187,10 +189,14 @@ module.exports = {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
+                        console.log("inside add user function back end");
                         console.log(userInfo);
+                        console.log(process.env.DATABASE_URL);
                         return [4 /*yield*/, db.query("INSERT INTO users(user_id, firstName, lastName) VALUES($1, $2, $3) ON CONFLICT (user_id) DO NOTHING", [userInfo.user_id, userInfo.firstName, userInfo.lastName])];
                     case 1:
                         user = _a.sent();
+                        console.log("made it past query");
+                        console.log(user);
                         return [2 /*return*/, user];
                     case 2:
                         error_6 = _a.sent();
@@ -199,7 +205,7 @@ module.exports = {
                             message = error_6.message;
                         else
                             message = String(error_6);
-                        console.log(message);
+                        console.log("Error:" + message);
                         return [2 /*return*/, message];
                     case 3: return [2 /*return*/];
                 }
@@ -226,7 +232,7 @@ module.exports = {
                             message = error_7.message;
                         else
                             message = String(error_7);
-                        console.log(message);
+                        console.log("Err: " + message);
                         return [2 /*return*/, message];
                     case 3: return [2 /*return*/];
                 }
