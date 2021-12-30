@@ -83,7 +83,7 @@ function SearchArea() {
                         firstName = {idea.firstName}
                         lastName = {idea.lastName}
                         title = {idea.title}
-                        description= {idea.description}
+                        description= {idea.descr}
                     />
                     ))}
                 </div>
