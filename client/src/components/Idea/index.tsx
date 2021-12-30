@@ -56,7 +56,7 @@ function Idea(props:Idea) {
       donation: parseInt(donateRef.current?.value!)
     };
 
-    const addDonation = await API.updateIdea(newUpdate, currentId);
+    const addDonation = await API.updateIdea(newUpdate, props.id);
     const session = await API.donateMoney(newPayment);
     console.log(session);
 

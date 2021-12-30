@@ -116,7 +116,7 @@ module.exports = {
     updateIdea: async function(req: any, res: any) {
         try {
             console.log(req.body);
-            const idea = await db.query("UPDATE ideas SET donations = donations+$1, lastDonated = $1 WHERE stripe_id = $2",
+            const idea = await db.query("UPDATE ideas SET donations = donations+$1, lastDonated = $1 WHERE ideas_id = $2",
                                         [req.body.donation, req.params.id]);
             res.json(idea);
 

@@ -241,7 +241,7 @@ module.exports = {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
                         console.log(req.body);
-                        return [4 /*yield*/, db.query("UPDATE ideas SET donations = donations+$1, lastDonated = $1 WHERE stripe_id = $2", [req.body.donation, req.params.id])];
+                        return [4 /*yield*/, db.query("UPDATE ideas SET donations = donations+$1, lastDonated = $1 WHERE ideas_id = $2", [req.body.donation, req.params.id])];
                     case 1:
                         idea = _a.sent();
                         res.json(idea);
