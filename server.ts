@@ -10,7 +10,7 @@ const passport = require("passport");
 dotenv.config();
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // Define middleware
 app.use(express.urlencoded({ extended: true }));
@@ -27,7 +27,10 @@ app.use(
   app.use(passport.session());
   app.use(bodyParser.json());
 
-app.use(express.static("client/build"));
+  
+if (process.env.NODE_ENV === "production") {
+    app.use(express.static("client/build"));
+}
 
 app.use(router);
 
