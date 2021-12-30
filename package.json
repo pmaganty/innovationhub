@@ -6,7 +6,7 @@
   },
   "scripts": {
     "start": "run start:app && npm run start:server",
-    "start:server": "tsc && node build/server.js",
+    "start:server": "node build/server.js",
     "start:app": "cd client && npm run start",
     "start:dev": "cd client && npm run start"
   },
