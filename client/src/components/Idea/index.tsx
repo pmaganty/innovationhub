@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import "./index.css";
 import { Col, Row, Container } from "react-bootstrap";
 import Card from '@mui/material/Card';
@@ -35,32 +35,65 @@ interface IdeaUpdateInfo {
 
 function Idea(props:Idea) {
 
+  const [errorFlag, setErrorFlag] = useState<Boolean>(false);
+
   const donateRef = useRef<HTMLInputElement>();
 
   async function donate() {
 
     console.log("donate button clicked");
-    const currentIdea = await API.getStripeId(props.id);
 
-    const currentId = currentIdea.data.rows[0].stripe_id;
+    if (!validateDonation()) {
 
-    console.log(currentId);
+      setErrorFlag(!errorFlag);
+      setErrorFlag(true);
+    
+    } else {
 
-    const newPayment: Payment = {
-      amount: parseInt(donateRef.current?.value!) * 100, //amount passed to stripe must be in cents
-      stripe_id: currentId,
-      title: props.title
-    };
+      setErrorFlag(!errorFlag);
+      setErrorFlag(false)
 
-    const newUpdate: IdeaUpdateInfo = {
-      donation: parseInt(donateRef.current?.value!)
-    };
+      const currentIdea = await API.getStripeId(props.id);
 
-    const addDonation = await API.updateIdea(newUpdate, props.id);
-    const session = await API.donateMoney(newPayment);
-    console.log(session);
+      const currentId = currentIdea.data.rows[0].stripe_id;
 
-    window.location.href = session.data.url;
+      console.log(currentId);
+
+      const newPayment: Payment = {
+        amount: parseInt(donateRef.current?.value!) * 100, //amount passed to stripe must be in cents
+        stripe_id: currentId,
+        title: props.title
+      };
+
+      const newUpdate: IdeaUpdateInfo = {
+        donation: parseInt(donateRef.current?.value!)
+      };
+
+      const addDonation = await API.updateIdea(newUpdate, props.id);
+      const session = await API.donateMoney(newPayment);
+      console.log(session);
+
+      window.location.href = session.data.url;
+    }
+  }
+
+  function validateDonation() {
+    if (donateRef.current?.value.match(/^[0-9]+$/)) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  let donationErrSection;
+
+  if (errorFlag){
+      if (!validateDonation()) {
+          donationErrSection = 
+          <section id="donateErr">
+              Please enter a valid, whole number.
+          </section>;
+      } else { donationErrSection = <section></section> }
   }
 
   return (
@@ -76,9 +109,12 @@ function Idea(props:Idea) {
             />
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">
+                <div id="titleDiv">
                 {props.title}
+                </div>
               </Typography>
               <Typography variant="body2" color="text.secondary">
+                <div id="ideaAccordian">
                 <Accordion>
                   <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
@@ -93,6 +129,7 @@ function Idea(props:Idea) {
                     </Typography>
                   </AccordionDetails>
                 </Accordion>
+                </div>
               </Typography>
             </CardContent>
           </CardActionArea>
@@ -106,17 +143,17 @@ function Idea(props:Idea) {
             autoComplete="off"
             >
               <div>
-                  <TextField
-                  required
-                  id="outlined-required"
-                  label="Required"
-                  defaultValue="Title"
-                  inputRef={donateRef}
-                  />
+              <TextField 
+              sx={{
+                padding: "2px",
+                fontSize: "15px"
+                }}
+              id="outlined-search" label="First Name" type="donation" inputRef={donateRef}/>
               </div>
               <Button size="small" color="primary" onClick={donate}>
               Donate
               </Button>
+              {donationErrSection}
             </Box>
           </CardActions>
         </Card>

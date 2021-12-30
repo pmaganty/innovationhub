@@ -12,7 +12,22 @@ import "./index.css";
 
 function CreateForm() {
 
-    const [errorFlag, setErrorFlag] = useState<Boolean>(false);
+    interface Errors {
+        first: boolean;
+        last: boolean;
+        title: boolean;
+        email: boolean;
+    }
+
+    const [errorFlag, setErrorFlag] = useState<Errors>({
+        first: false,
+        last: false,
+        title: false,
+        email: false
+    });
+    /*const [lastErrFlag, setLastErrFlag] = useState<Boolean>(false);
+    const [titleErrFlag, setTitleErrFlag] = useState<Boolean>(false);
+    const [emailErrFlag, setEmailErrFlag] = useState<Boolean>(false);*/
 
     const firstNameRef = useRef<HTMLInputElement>();
     const lastNameRef = useRef<HTMLInputElement>();
@@ -37,11 +52,78 @@ function CreateForm() {
 
         console.log("button clicked");
 
-        if (!validateFirstName() || !validateLastName() || !validateEmail() || !validateTitle()) {
-
-            setErrorFlag(true);
-        
+        if (!validateFirstName() || !validateLastName() || !validateTitle() || !validateEmail()) {
+            if (!validateFirstName()) {
+                setErrorFlag({
+                    first: !errorFlag.first,
+                    last: errorFlag.last,
+                    title: errorFlag.title,
+                    email: errorFlag.email
+                });
+                setErrorFlag({
+                    first: true,
+                    last: errorFlag.last,
+                    title: errorFlag.title,
+                    email: errorFlag.email
+                });
+            }
+            if (!validateLastName()) {
+                setErrorFlag({
+                    first: errorFlag.first,
+                    last: !errorFlag.last,
+                    title: errorFlag.title,
+                    email: errorFlag.email
+                });
+                setErrorFlag({
+                    first: errorFlag.first,
+                    last: true,
+                    title: errorFlag.title,
+                    email: errorFlag.email
+                });
+            } 
+            if (!validateTitle()) {
+                console.log("title wrong")
+                setErrorFlag({
+                    first: errorFlag.first,
+                    last: errorFlag.last,
+                    title: !errorFlag.title,
+                    email: errorFlag.email
+                });
+                setErrorFlag({
+                    first: errorFlag.first,
+                    last: errorFlag.last,
+                    title: true,
+                    email: errorFlag.email
+                });
+            }
+            if (!validateEmail()) {
+                setErrorFlag({
+                    first: errorFlag.first,
+                    last: errorFlag.last,
+                    title: errorFlag.title,
+                    email: !errorFlag.email
+                });
+                setErrorFlag({
+                    first: errorFlag.first,
+                    last: errorFlag.last,
+                    title: errorFlag.title,
+                    email: true
+                });
+            }
         } else {
+
+            setErrorFlag({
+                first: !errorFlag.first,
+                last: !errorFlag.last,
+                title: !errorFlag.title,
+                email: !errorFlag.email
+            });
+            setErrorFlag({
+                first: false,
+                last: false,
+                title: false,
+                email: false
+            });
 
             const curUser = await API.checkUser();
             console.log(curUser.data.id);
@@ -64,7 +146,6 @@ function CreateForm() {
 
             window.location.href = stripeOut.data.url;
         }
-        
     }
 
     function validateFirstName() {    
@@ -84,6 +165,7 @@ function CreateForm() {
     }
 
     function validateTitle() {    
+        console.log("title validation");
         if (titleRef.current?.value) {
             return true;
         } else {
@@ -105,12 +187,8 @@ function CreateForm() {
 
     let firstNameErrSection, lastNameErrSection, titleErrSection, emailErrSection;
 
-    if (!errorFlag){
-        firstNameErrSection = <section></section>;
-        lastNameErrSection = <section></section>;
-        titleErrSection = <section></section>;
-        emailErrSection = <section></section>;
-    } else {
+    if (errorFlag.first || errorFlag.last || errorFlag.title || errorFlag.email) {
+
         if (!validateFirstName()) {
             firstNameErrSection = 
             <section className="col-sm-12 col-md-12 col-lg-12">
@@ -121,7 +199,10 @@ function CreateForm() {
                     </Alert>
                 </Stack>
             </section>;
+        } else { 
+            firstNameErrSection = <section></section>;
         }
+
         if (!validateLastName()) {
             lastNameErrSection = 
             <section className="col-sm-12 col-md-12 col-lg-12">
@@ -132,8 +213,12 @@ function CreateForm() {
                     </Alert>
                 </Stack>
             </section>;
+        } else { 
+            lastNameErrSection = <section></section>;
         }
+
         if (!validateTitle()) {
+            console.log("title wrong render");
             titleErrSection = 
             <section className="col-sm-12 col-md-12 col-lg-12">
                 <Stack sx={{ width: '50%', margin: 'auto', marginTop: '30px' }} spacing={2}>
@@ -143,18 +228,24 @@ function CreateForm() {
                     </Alert>
                 </Stack>
             </section>;
+        } else { 
+            titleErrSection = <section></section>;
         }
+
         if (!validateEmail()) {
             emailErrSection = 
             <section className="col-sm-12 col-md-12 col-lg-12">
                 <Stack sx={{ width: '50%', margin: 'auto', marginTop: '30px' }} spacing={2}>
                     <Alert severity="error">
                         <AlertTitle>Error</AlertTitle>
-                        Please Enter a valid email address.
+                        Please enter a valid email address;
                     </Alert>
                 </Stack>
             </section>;
+        } else { 
+            emailErrSection = <section></section>;
         }
+
     }
 
   return (

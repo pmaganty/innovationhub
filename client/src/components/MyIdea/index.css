@@ -1,0 +1,10 @@
+#donationDiv {
+    background-color: #497b94;
+    color: white;
+    border: 2px solid gray;
+    padding: 5px;
+    margin: 10px;
+    font-weight: bold;
+    font-size: 15px;
+    text-align: center;
+}

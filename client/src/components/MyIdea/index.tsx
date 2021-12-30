@@ -1,5 +1,6 @@
 import React, { useContext, createContext } from 'react';
 import "../Idea/index.css";
+import "./index.css";
 import { Col, Row, Container } from "react-bootstrap";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -42,6 +43,7 @@ function MyIdea(props:Idea) {
                 {props.title}
               </Typography>
               <Typography variant="body2" color="text.secondary">
+                <div id="ideaAccordian">
                 <Accordion>
                   <AccordionSummary
                     expandIcon={<ExpandMoreIcon />}
@@ -56,9 +58,12 @@ function MyIdea(props:Idea) {
                     </Typography>
                   </AccordionDetails>
                 </Accordion>
+                </div>
               </Typography>
               <Typography gutterBottom variant="h5" component="div">
-                Donations: ${props.donations}
+                <div id="donationDiv">
+                  Donations: ${props.donations}
+                </div>
               </Typography>
             </CardContent>
           </CardActionArea>

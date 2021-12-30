@@ -2,3 +2,24 @@
     max-width: 100% !important;
     margin: 30px !important;
 }
+
+#ideaAccordian {
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
+#titleDiv {
+    background-color: #497b94;
+    color: white;
+    border: 2px solid gray;
+    padding: 5px;
+    margin: 10px;
+    font-weight: bold;
+    text-align: center;
+}
+
+#donateErr {
+    color: red;
+    font-weight: bold;
+    margin: 5px;
+}
