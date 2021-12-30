@@ -11,6 +11,7 @@ function Login() {
         <div>
             <Header />
             <LoginForm />
+            <div>TEST</div>
         </div>
     );
 }
