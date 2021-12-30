@@ -32,7 +32,7 @@ var GoogleStrategy = require('passport-google-oauth20').Strategy;
 var passport = require("passport");
 dotenv.config();
 var app = (0, express_1.default)();
-var PORT = 3000;
+var PORT = process.env.PORT || 3000;
 // Define middleware
 app.use(express_1.default.urlencoded({ extended: true }));
 app.use(express_1.default.json());
@@ -44,7 +44,9 @@ app.use((0, express_session_1.default)({
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(bodyParser.json());
+//if (process.env.NODE_ENV === "production") {
 app.use(express_1.default.static("client/build"));
+//}
 app.use(routes_1.router);
 // Start the API server
 app.listen(PORT, function () {
