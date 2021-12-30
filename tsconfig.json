@@ -8,6 +8,6 @@
     "skipLibCheck": true,
     "outDir": "./build"
   },
-  "include": ["server.ts"],
+  "include": ["server.ts", "routes"],
   "exclude": ["node_modules"]
 }
