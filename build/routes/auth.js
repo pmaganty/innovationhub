@@ -2,7 +2,7 @@
 var GoogleStrategy = require('passport-google-oauth20').Strategy;
 var passport = require("passport");
 var ihubController = require("./ihubController");
-require('dotenv').config();
+require('dotenv').config({ path: __dirname + '../.env' });
 // Save client ID and SECRET for google oauth2.0
 var GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 var GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
@@ -14,7 +14,7 @@ console.log(GOOGLE_CLIENT_SECRET);
 passport.use(new GoogleStrategy({
     clientID: GOOGLE_CLIENT_ID,
     clientSecret: GOOGLE_CLIENT_SECRET,
-    callbackURL: process.env.GOOGLE_HEROKU_CALLBACK /*GOOGLE_LOCAL_CALLBACK*/
+    callbackURL: /*process.env.GOOGLE_HEROKU_CALLBACK*/ process.env.GOOGLE_LOCAL_CALLBACK
 }, function (accessToken, refreshToken, profile, done) {
     var user = ihubController.addUser({
         user_id: profile.id,
