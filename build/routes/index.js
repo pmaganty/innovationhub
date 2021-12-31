@@ -41,15 +41,20 @@ var express_1 = require("express");
 var passport = require("passport");
 var path = require("path");
 var stripe = require("stripe")('sk_test_51KAzN1K57oIWPlviEqzrARmSoxhzcFGfb6eDKk8BYQ6BFAJ9SfyvudRZbrtEwqR9i01yBro8Fqv60knWdjieIP0900SMH2KxL6');
-//import ihubController from "../controllers/ihubController";
 var ihubController = require("./ihubController");
 var router = (0, express_1.Router)();
 exports.router = router;
 require("./auth");
+// Google oauth2.0 API to reroute user to login
+// This is taken from passport documentation
 router.get('/auth/google', passport.authenticate('google', { scope: ['email', 'profile'] }));
+// Google oauth2.0 callback
+// This is taken from passport documentation
 router.get('/auth/google/callback', passport.authenticate('google', { failureRedirect: '/failedLogin', session: true }), function (req, res) {
     res.redirect('/home');
 });
+// Function to generate account link with account info associated with user payment info
+// This is taken from Stripe documentation
 function generateAccountLink(accountID, origin, idea_id) {
     return stripe.accountLinks
         .create({
@@ -60,13 +65,14 @@ function generateAccountLink(accountID, origin, idea_id) {
     })
         .then(function (link) { return link.url; });
 }
+// Onboard user payment information useing Stripe Connect API
+// This is taken from Stripe documentation
 router.post("/onboard-user", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var account, origin_1, accountLinkURL, error_1, message;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 3, , 4]);
-                console.log("inside back end onboard user route");
                 return [4 /*yield*/, stripe.accounts.create({
                         type: "standard",
                         business_type: 'individual',
@@ -94,17 +100,16 @@ router.post("/onboard-user", function (req, res) { return __awaiter(void 0, void
         }
     });
 }); });
+// Get stripe account associated with a stripe id using Stripe Connect API
 router.get("/stripeAccount/:id", function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var account, error_2, message;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 _a.trys.push([0, 2, , 3]);
-                console.log("inside back end check stripe account route");
                 return [4 /*yield*/, stripe.accounts.retrieve(req.params.id)];
             case 1:
                 account = _a.sent();
-                console.log(account);
                 res.send(account);
                 return [3 /*break*/, 3];
             case 2:
@@ -121,23 +126,22 @@ router.get("/stripeAccount/:id", function (req, res) { return __awaiter(void 0, 
         }
     });
 }); });
+// Get current user of current session
 router.get('/user', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     return __generator(this, function (_a) {
-        console.log("inside backend user route");
         res.send(req.user);
         return [2 /*return*/];
     });
 }); });
+// Create checkout session for user to input payment using Stripe Connect API
+// This is taken from Stripe documentation
 router.post('/create-checkout-session', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
     var origin, _a, amount, stripe_id, title, session;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
-                console.log("backend create checkout session");
                 origin = "".concat(req.headers.origin);
-                console.log(origin);
                 _a = req.body, amount = _a.amount, stripe_id = _a.stripe_id, title = _a.title;
-                console.log(amount);
                 return [4 /*yield*/, stripe.checkout.sessions.create({
                         payment_method_types: ['card'],
                         line_items: [
@@ -164,9 +168,7 @@ router.post('/create-checkout-session', function (req, res) { return __awaiter(v
         }
     });
 }); });
-router.get('/api', function (req, res) {
-    res.send({ Id: 5, Name: "Pran" });
-});
+// All custom routes below
 router.route("/api/ihub")
     .post(ihubController.addIdea)
     .put(ihubController.updateIdeaStripeID);
@@ -179,8 +181,6 @@ router.route("/api/ihub/donations/invalid")
     .delete(ihubController.deleteInvalidDonation);
 router.route("/api/ihub/search/:searchTerm")
     .get(ihubController.readAll);
-router.route("/api/ihub/email/:email")
-    .get(ihubController.checkEmail);
 router.route("/api/ihub/stripeId/:id")
     .get(ihubController.getStripeId)
     .put(ihubController.updateIdea);

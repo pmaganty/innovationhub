@@ -53,7 +53,7 @@ module.exports = {
             res.json(message);
         }
     },
-    // Get stripe id associated with idea id
+    // Get idea associated with idea id
     getStripeId: async function(req: any, res: any) {
         try {
             const idea = await db.query("SELECT * FROM ideas WHERE ideas_id = $1", 
@@ -68,9 +68,10 @@ module.exports = {
             res.json(message);
         }
     },
-    // Add a new user
+    // Add new user
     addUser: async function(userInfo: any) {
         try {
+            console.log(process.env.DATABASE_URL);
             const user = await db.query("INSERT INTO users(user_id, firstName, lastName) VALUES($1, $2, $3) ON CONFLICT (user_id) DO NOTHING",
                                         [userInfo.user_id, userInfo.firstName, userInfo.lastName]);
 
@@ -99,7 +100,7 @@ module.exports = {
             return message;
         }
     },
-    // Update idea donation
+    // Update idea with a donation amount
     updateIdea: async function(req: any, res: any) {
         try {
             const idea = await db.query("UPDATE ideas SET donations = donations+$1, lastDonated = $1 WHERE ideas_id = $2",
@@ -129,7 +130,7 @@ module.exports = {
             return message;
         }
     }, 
-    // Delete last idea entered
+    // Delete last idea
     deleteInvalidIdea: async function(req: any, res: any) {
         try {
             const idea = await db.query("DELETE FROM ideas WHERE ideas_id = (SELECT MAX(ideas_id) FROM ideas)");
@@ -143,7 +144,7 @@ module.exports = {
             return message;
         }
     },    
-    // Update last donation if invalid
+    // Delete last made donation
     deleteInvalidDonation: async function(req: any, res: any) {
         try {
 

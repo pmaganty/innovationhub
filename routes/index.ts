@@ -120,9 +120,6 @@ router.route("/api/ihub/donations/invalid")
 router.route("/api/ihub/search/:searchTerm")
   .get(ihubController.readAll);
 
-router.route("/api/ihub/email/:email")
-  .get(ihubController.checkEmail);
-
 router.route("/api/ihub/stripeId/:id")
   .get(ihubController.getStripeId)
   .put(ihubController.updateIdea);

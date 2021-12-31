@@ -22,7 +22,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-//const express = require("express");
 var express_1 = __importDefault(require("express"));
 var express_session_1 = __importDefault(require("express-session"));
 var routes_1 = require("./routes");
@@ -31,6 +30,7 @@ var bodyParser = require("body-parser");
 var GoogleStrategy = require('passport-google-oauth20').Strategy;
 var passport = require("passport");
 dotenv.config();
+// Create express app
 var app = (0, express_1.default)();
 var PORT = process.env.PORT || 3000;
 // Define middleware
