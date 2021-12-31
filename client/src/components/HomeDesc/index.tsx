@@ -48,6 +48,8 @@ function HomeDesc() {
                         fontSize: '20px',
                         "&:hover": {
                           backgroundColor: "#056291",
+                          color: 'white',
+                          border: '1px solid white'
                         }
                       }}
                       className="homeButton" variant="outlined" href="/auth/google">
