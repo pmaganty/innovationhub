@@ -1,6 +1,6 @@
 #description {
     line-height: 1.6;
-    font-size: 32px;
+    font-size: 22px;
     text-align: center;
 }
 
@@ -13,8 +13,8 @@
 #startText {
     color: white;
     text-align: center;
-    padding: 50px;
-    font-size: 46px;
+    padding: 30px;
+    font-size: 36px;
 }
 
 #startDiv {
@@ -25,13 +25,13 @@
 #temp_top {
     background-color: #c6e8f8;
     border-top: 2px solid black;
-    margin-bottom: 20px;
+    margin-bottom: 50px;
 }
 
 #temp_bottom {
     background-color: #c6e8f8;
     border-top: 2px solid black;
-    margin-top: 20px;
+    margin-top: 50px;
 }
 
 #buttonDiv {

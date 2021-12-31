@@ -2,7 +2,7 @@ import React from 'react';
 import "./index.css";
 import {Navbar, Nav, Container} from "react-bootstrap";
 
-
+// Header component for non-logged-in users
 function Header() {
   return (
     <div>

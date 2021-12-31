@@ -25,40 +25,19 @@ interface Idea {
   donations: number;
 }
 
+// MyIdea to print ideas associated with user
 function MyIdea(props:Idea) {
 
   return (
     <div>
-      <section className="col-override col-sm-12 col-md-6 col-lg-6">
+      <section className="col-override col-xs-12 col-sm-12 col-md-6 col-lg-6">
         <Card sx={{ maxWidth: 500, width:  500}}>
-          <CardActionArea>
-            <CardMedia
-              component="img"
-              height="140"
-              image="/static/images/cards/contemplative-reptile.jpg"
-              alt="green iguana"
-            />
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">
                 {props.title}
               </Typography>
               <Typography variant="body2" color="text.secondary">
-                <div id="ideaAccordian">
-                <Accordion>
-                  <AccordionSummary
-                    expandIcon={<ExpandMoreIcon />}
-                    aria-controls="panel1a-content"
-                    id="panel1a-header"
-                  >
-                    <Typography>Description</Typography>
-                  </AccordionSummary>
-                  <AccordionDetails>
-                    <Typography>
-                      {props.description}
-                    </Typography>
-                  </AccordionDetails>
-                </Accordion>
-                </div>
+                <div id="descrOverFlow">{props.description}</div>
               </Typography>
               <Typography gutterBottom variant="h5" component="div">
                 <div id="donationDiv">
@@ -66,7 +45,6 @@ function MyIdea(props:Idea) {
                 </div>
               </Typography>
             </CardContent>
-          </CardActionArea>
         </Card>
       </section>
     </div>

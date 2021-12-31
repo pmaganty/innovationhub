@@ -6,6 +6,7 @@ import Stack from '@mui/material/Stack';
 import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 
+// Redirect to this page if user login is unsuccessful
 function FailLogin() {
 
     const navigate = useNavigate();

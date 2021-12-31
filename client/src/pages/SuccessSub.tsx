@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import HeaderProt from '../components/HeaderProt';
 import API from '../API';
 
+// Reroute user here if payment information submission successful
 function SuccessSub() {
 
   const navigate = useNavigate();

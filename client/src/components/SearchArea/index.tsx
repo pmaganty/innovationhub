@@ -7,8 +7,10 @@ import TextField from '@mui/material/TextField';
 import { Col, Row, Container } from "react-bootstrap";
 import HomeImg from "../HomeImg";
 
+// Component for search results
 function SearchArea() {
 
+  // Set state for all ideas associated with a search input
   const [ideas, setIdeas] = React.useState<
     Array<{
         firstName: string,
@@ -16,7 +18,7 @@ function SearchArea() {
         title: string,
         description: string
     }>
->([])
+  >([])
 
   const searchRef = useRef<HTMLInputElement>();
   let searchTerm = "";
@@ -25,26 +27,15 @@ function SearchArea() {
     searchTerm: string;
   }
 
+  // Function will take the search entry and get all matching ideas from database
   async function getResults() {
-
-    console.log("input changed");
-
-    console.log(searchRef.current?.value);
 
     const newSearch: Search = {
       searchTerm: searchRef.current?.value!,
     };
 
-
-    console.log(searchRef.current?.value!);
-
     if (searchRef.current?.value) {
-      console.log("search ref exists");
-
       let temp_ideas = await API.readAll(searchRef.current?.value);   
-
-      console.log(temp_ideas.data.rows);
-
       setIdeas(temp_ideas.data.rows);
     } else {
       setIdeas([]);
@@ -52,17 +43,18 @@ function SearchArea() {
 
   }
 
+  // Render div to dom everytime new search input entered
   return (
     <div>
       <section className="row justify-content-center">
-        <div className="col-sm-12 col-md-12 col-lg-12">
+        <div className="col-12">
           <HomeImg />
         </div>
       </section>
       <div className="row justify-content-center">
-        <div className="col-sm-12 col-md-12 col-lg-12">
+        <div className="col-12">
           <section className="row justify-content-center">
-            <div id="searchBox" className="col-sm-10 col-md-10 col-lg-10">
+            <div id="searchBox" className="col-10">
               <Box
               sx={{
                 width: 2000,
@@ -75,7 +67,7 @@ function SearchArea() {
             </div>
           </section>
           <section className="row justify-content-center">
-            <div className="col-sm-12 col-md-12 col-lg-12">
+            <div className="col-12">
                 <div className="row justify-content-center">
                     {ideas.map( (idea: any) => (
                         <Idea

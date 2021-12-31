@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import HeaderProt from '../components/HeaderProt';
 import API from '../API';
 
+// Redirect here if donation is unsuccessful
 function FailPayment() {
 
     const navigate = useNavigate();
@@ -15,12 +16,12 @@ function FailPayment() {
         navigate("/home");
     }
 
+    // Delete the last donation
     async function deleteLastDonation() {
         const deleted = await API.deleteInvalidDonation();
-    
-        console.log(deleted);
     }
 
+    // Delete donation once at render
     useEffect(() => {
         deleteLastDonation();
     }, []);

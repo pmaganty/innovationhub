@@ -1,8 +1,7 @@
 import React from 'react';
-import Img from "./ihub_img_3.png";
 import "./index.css";
 
-
+// Homeimg component for top of home page
 function HomeImg() {
   return (
     <div>

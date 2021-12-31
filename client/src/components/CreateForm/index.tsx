@@ -1,5 +1,4 @@
 import React, {useRef, useState} from "react";
-import Img from "./ihub_img_3.png";
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import Stack from '@mui/material/Stack';
@@ -9,9 +8,10 @@ import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 import "./index.css";
 
-
+// React component that creates a form for users to input new ideas
 function CreateForm() {
 
+    // Error code definition
     interface Errors {
         first: boolean;
         last: boolean;
@@ -25,10 +25,8 @@ function CreateForm() {
         title: false,
         email: false
     });
-    /*const [lastErrFlag, setLastErrFlag] = useState<Boolean>(false);
-    const [titleErrFlag, setTitleErrFlag] = useState<Boolean>(false);
-    const [emailErrFlag, setEmailErrFlag] = useState<Boolean>(false);*/
 
+    // Keeping track of user input to the create form box using React useRef hook
     const firstNameRef = useRef<HTMLInputElement>();
     const lastNameRef = useRef<HTMLInputElement>();
     const titleRef = useRef<HTMLInputElement>();
@@ -48,10 +46,18 @@ function CreateForm() {
         stripe_id: string;
     }
     
+
+    /*
+    Function is called when submit button is clicked.
+    It will:
+        1. validate user input and return error if not valid
+        2. add user idea into the database if no errors on submit
+        3. reroute the user to the stripe payment information entry
+        4. stripe will then reroute user to a success or failure page
+    */
     async function addNew() {
 
-        console.log("button clicked");
-
+        // 1. validate user input and return error if not valid
         if (!validateFirstName() || !validateLastName() || !validateTitle() || !validateEmail()) {
             if (!validateFirstName()) {
                 setErrorFlag({
@@ -125,8 +131,8 @@ function CreateForm() {
                 email: false
             });
 
+            // get current user id
             const curUser = await API.checkUser();
-            console.log(curUser.data.id);
 
             const newIdea: Idea = {
                 firstName: firstNameRef.current?.value!,
@@ -137,17 +143,18 @@ function CreateForm() {
                 user_id: curUser.data.id
             };
 
+            // 2. add user idea into the database if no errors on submit
             const idea = await API.addIdea(newIdea);
-            console.log(idea.data.rows[0].ideas_id);
 
+            // 3. reroute the user to the stripe payment information entry
             const stripeOut = await API.stripeOnboard({email: emailRef.current?.value!, id: idea.data.rows[0].ideas_id});
-            console.log(stripeOut.data.url);
-            console.log(stripeOut.data.id);
-
             window.location.href = stripeOut.data.url;
+
+            // Step 4 will occur after re-route.
         }
     }
 
+    // Validate first name input exists.
     function validateFirstName() {    
         if (firstNameRef.current?.value) {
             return true;
@@ -155,7 +162,7 @@ function CreateForm() {
             return false;
         }
     }
-
+    // Validate last name input exists
     function validateLastName() {    
         if (lastNameRef.current?.value) {
             return true;
@@ -164,6 +171,7 @@ function CreateForm() {
         }
     }
 
+    // Validate title input exists
     function validateTitle() {    
         console.log("title validation");
         if (titleRef.current?.value) {
@@ -173,6 +181,7 @@ function CreateForm() {
         }
     }
 
+    // Validate email input exists in the correct format
     function validateEmail() {
         if (emailRef.current?.value.
             toLowerCase()
@@ -185,8 +194,10 @@ function CreateForm() {
         }
     }
 
+    
     let firstNameErrSection, lastNameErrSection, titleErrSection, emailErrSection;
 
+    // Conditionally render error message to dom based on error flag
     if (errorFlag.first || errorFlag.last || errorFlag.title || errorFlag.email) {
 
         if (!validateFirstName()) {
@@ -248,16 +259,20 @@ function CreateForm() {
 
     }
 
-  return (
+    // Return div to be rendered to dom
+    return (
     <div>
         <div className="row justify-content-center">
+            {/*conditional error blocks*/}
             {firstNameErrSection}
             {lastNameErrSection}
             {titleErrSection}
             {emailErrSection}
-            <div id="formDiv" className="col-sm-auto col-md-auto col-lg-auto">
+
+            {/*create idea form*/}
+            <div id="formDiv" className="col-auto">
                 <div className="row justify-content-center">
-                    <div id="inputDiv" className="col-sm-12 col-md-12 col-lg-12">
+                    <div id="inputDiv" className="col-12">
                         <Box
                         component="form"
                         sx={{
@@ -316,16 +331,19 @@ function CreateForm() {
                         </Box>
                     </div>
                 </div>
-                <div id="submitDiv" className="col-sm-auto col-md-auto col-lg-auto">
+                <div id="submitDiv" className="col-auto">
                     <Button sx={{
                         backgroundColor: '#497b94',
-                      }}
-                      variant="contained" onClick={addNew}>Submit</Button>
+                        "&:hover": {
+                            backgroundColor: "#497b94"
+                            }
+                        }}
+                        variant="contained" onClick={addNew}>Submit</Button>
                 </div>
             </div>
         </div>
     </div>
-  );
+    );
 }
 
 export default CreateForm;

@@ -7,6 +7,7 @@ import HeaderProt from '../components/HeaderProt';
 
 function MyIdeas() {
 
+    // set state for ideas associated with user
     const [ideas, setIdeas] = React.useState<
     Array<{
         firstname: string,
@@ -19,33 +20,26 @@ function MyIdeas() {
 
     let userId = "";
 
+    // Get all current user id and all ideas associated with that user
     async function getIdeas() {
         const curUser = await API.checkUser();
-        console.log(curUser.data.id);
-
         userId = curUser.data.id;
-
         const userIdeas = await API.readUserIdeas(userId);
-        console.log(userIdeas.data.rows);
-
         setIdeas(userIdeas.data.rows);
     }
 
+    // Delete idea from user ideas list when delete button clicked
     async function deleteIdea(event: React.MouseEvent<HTMLButtonElement>) {
-        console.log("delete button clicked");
-    
         let deletedIdea = await API.deleteIdea(event.currentTarget.getAttribute('data-id'));
-    
-        console.log(deletedIdea);
-
         getIdeas();
     }
 
+    // Get all ideas associated with user every time page re-renders
     useEffect(() => {
         getIdeas();
     }, []);
 
-
+    // Render html to dom
     return (
         <div>
             <HeaderProt />

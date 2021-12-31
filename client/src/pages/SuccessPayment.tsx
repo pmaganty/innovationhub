@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import HeaderProt from '../components/HeaderProt';
 
+// Reroute user here if payment was successful
 function SuccessPayment() {
   const navigate = useNavigate();
 

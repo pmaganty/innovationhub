@@ -7,6 +7,7 @@ import Button from '@mui/material/Button';
 import HeaderProt from '../components/HeaderProt';
 import API from '../API';
 
+// Navigate to this page if user payment information submission unsuccessful
 function FailSub() {
 
   const navigate = useNavigate();
@@ -14,16 +15,6 @@ function FailSub() {
   async function navigateToHome() {
       navigate("/home");
   }
-
-  /*async function deleteLastEntry() {
-    const deleted = await API.deleteInvalidIdea();
-
-    console.log(deleted);
-  }
-
-  useEffect(() => {
-    deleteLastEntry();
-  }, []);*/
 
   return (
     <div>

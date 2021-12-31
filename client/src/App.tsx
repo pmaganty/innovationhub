@@ -13,6 +13,7 @@ import FailLogin from './pages/FailLogin';
 import MyIdeas from './pages/MyIdeas';
 import CheckSubmission from './pages/CheckSubmission';
 
+// Top level component that renders all pages and routes
 function App() {
   return (
     <div>

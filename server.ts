@@ -1,14 +1,12 @@
-//const express = require("express");
 import express from "express";
 import session from "express-session";
 import { router } from "./routes";
 import * as dotenv from "dotenv";
 const bodyParser = require("body-parser");
-const GoogleStrategy = require('passport-google-oauth20').Strategy;
-const passport = require("passport");
 
 dotenv.config();
 
+// Create express app and specify PORT
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -23,15 +21,14 @@ app.use(
         saveUninitialized: true
     })  
   );
-  app.use(passport.initialize());
-  app.use(passport.session());
-  app.use(bodyParser.json());
+app.use(passport.initialize());
+app.use(passport.session());
+app.use(bodyParser.json());
 
   
-//if (process.env.NODE_ENV === "production") {
-    app.use(express.static("client/build"));
-//}
+app.use(express.static("client/build"));
 
+// Allow app to user outes defined in router
 app.use(router);
 
 // Start the API server

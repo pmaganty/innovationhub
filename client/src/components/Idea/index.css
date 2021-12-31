@@ -23,3 +23,8 @@
     font-weight: bold;
     margin: 5px;
 }
+
+#descrOverFlow {
+    height: 100px;
+    overflow-y: auto;
+}
