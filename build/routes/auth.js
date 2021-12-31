@@ -4,7 +4,7 @@ var passport = require("passport");
 var ihubController = require("./ihubController");
 // Save client ID and SECRET for google oauth2.0
 var GOOGLE_CLIENT_ID = '906533237378-fudqvinp77l1e9kpokjlst1pcivd00rm.apps.googleusercontent.com';
-var GOOGLE_CLIENT_SECRET = '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';
+var GOOGLE_CLIENT_SECRET = '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';
 // Create google strategy to implement oauth using passport and google API
 // This is taken from passport documentation
 passport.use(new GoogleStrategy({
