@@ -6,15 +6,13 @@ require('dotenv').config({ path: __dirname + '../.env' });
 // Save client ID and SECRET for google oauth2.0
 var GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
 var GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
-console.log(GOOGLE_CLIENT_ID);
-console.log(GOOGLE_CLIENT_SECRET);
 // Create google strategy to implement oauth using passport and google API
 // This is taken from passport documentation
 // User GOOGLE_LOCAL_CALLBACK for local run and GOOGLE_HEROKU_CALLBACK for heroku run
 passport.use(new GoogleStrategy({
     clientID: GOOGLE_CLIENT_ID,
     clientSecret: GOOGLE_CLIENT_SECRET,
-    callbackURL: /*process.env.GOOGLE_HEROKU_CALLBACK*/ process.env.GOOGLE_LOCAL_CALLBACK
+    callbackURL: process.env.GOOGLE_HEROKU_CALLBACK /*process.env.GOOGLE_LOCAL_CALLBACK*/
 }, function (accessToken, refreshToken, profile, done) {
     var user = ihubController.addUser({
         user_id: profile.id,
