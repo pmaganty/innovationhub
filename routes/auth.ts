@@ -12,10 +12,11 @@ console.log(GOOGLE_CLIENT_SECRET);
 
 // Create google strategy to implement oauth using passport and google API
 // This is taken from passport documentation
+// User GOOGLE_LOCAL_CALLBACK for local run and GOOGLE_HEROKU_CALLBACK for heroku run
 passport.use(new GoogleStrategy({
     clientID: GOOGLE_CLIENT_ID,
     clientSecret: GOOGLE_CLIENT_SECRET,
-    callbackURL: "https://innovationhub1995.herokuapp.com/auth/google/callback"
+    callbackURL: process.env.GOOGLE_HEROKU_CALLBACK /*GOOGLE_LOCAL_CALLBACK*/
   },
   function(accessToken: any, refreshToken: any, profile: any, done: any) {
     const user = ihubController.addUser({ 
