@@ -1,10 +1,11 @@
 var GoogleStrategy = require('passport-google-oauth20').Strategy;
 const passport = require("passport");
 const ihubController = require("./ihubController");
+require('dotenv').config()
 
 // Save client ID and SECRET for google oauth2.0
-const GOOGLE_CLIENT_ID = '906533237378-h8modc6vh74fhhu6tl8jh4i1bsfammnl.apps.googleusercontent.com';
-const GOOGLE_CLIENT_SECRET = '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';
+const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID;
+const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
 
 console.log(GOOGLE_CLIENT_ID);
 console.log(GOOGLE_CLIENT_SECRET);
