@@ -12,7 +12,7 @@ console.log(GOOGLE_CLIENT_SECRET);
 passport.use(new GoogleStrategy({
     clientID: GOOGLE_CLIENT_ID,
     clientSecret: GOOGLE_CLIENT_SECRET,
-    callbackURL: "/auth/google/callback"
+    callbackURL: "https://innovationhub1995.herokuapp.com/auth/google/callback"
 }, function (accessToken, refreshToken, profile, done) {
     var user = ihubController.addUser({
         user_id: profile.id,
