@@ -62,8 +62,8 @@ export default {
     return axios.delete("/api/ihub/ideas/payment/invalid");
   },
   // Delete last donation if payment was invalid
-  deleteInvalidDonation: function() {
+  deleteInvalidDonation: function(id: any) {
     console.log("fronend route delete invalid donation");
-    return axios.delete("/api/ihub/donations/invalid");
+    return axios.delete("/api/ihub/donations/invalid/" + id);
   }
 };

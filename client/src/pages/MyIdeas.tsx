@@ -1,4 +1,5 @@
 import React, { useEffect, useState, createContext } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import Stack from '@mui/material/Stack';
 import MyIdea from "../components/MyIdea";
@@ -7,6 +8,8 @@ import HeaderProt from '../components/HeaderProt';
 
 function MyIdeas() {
 
+    const navigate = useNavigate();
+    
     // set state for ideas associated with user
     const [ideas, setIdeas] = React.useState<
     Array<{
@@ -34,8 +37,19 @@ function MyIdeas() {
         getIdeas();
     }
 
+        // Check if user is logged in.
+    // If they are not, redirect to home.
+    async function checkLoggedIn() {
+        const user = await API.checkUser();
+        if (user.data == "") {
+          console.log("user not logged in");
+          navigate("/");
+        }
+    }
+
     // Get all ideas associated with user every time page re-renders
     useEffect(() => {
+        checkLoggedIn();
         getIdeas();
     }, []);
 

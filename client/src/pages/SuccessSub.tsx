@@ -16,6 +16,19 @@ function SuccessSub() {
       navigate("/home");
   }
 
+  // If user not logged in, redirect to home.
+  async function checkLoggedIn() {
+    const user = await API.checkUser();
+    if (user.data == "") {
+      console.log("user not logged in");
+      navigate("/");
+    }
+  }
+
+  useEffect(() => {
+    checkLoggedIn();
+  }, []); 
+
   return (
     <div>
         <HeaderProt />

@@ -75,7 +75,7 @@ router.post("/onboard-user", async (req, res) => {
   // This is taken from Stripe documentation
   router.post('/create-checkout-session', async (req, res) => {
     const origin = `${req.headers.origin}`;
-    const { amount, stripe_id, title } = req.body;
+    const { amount, stripe_id, title, idea_id } = req.body;
 
     // Create new Checkout Session for the order
     // For full details see https://stripe.com/docs/api/checkout/sessions/create
@@ -91,7 +91,7 @@ router.post("/onboard-user", async (req, res) => {
       ],
       // ?session_id={CHECKOUT_SESSION_ID} means the redirect will have the session ID set as a query param
       success_url: `${origin}/successfulPayment`,
-      cancel_url: `${origin}/failedPayment`,
+      cancel_url: `${origin}/failedPayment?idea_id=${idea_id}`,
     }, {
       stripeAccount: stripe_id,
     });   
@@ -114,7 +114,7 @@ router.route("/api/ihub/ideas/:user")
 router.route("/api/ihub/ideas/payment/invalid")
   .delete(ihubController.deleteInvalidIdea);
 
-router.route("/api/ihub/donations/invalid")
+router.route("/api/ihub/donations/invalid/:id")
   .delete(ihubController.deleteInvalidDonation);
 
 router.route("/api/ihub/search/:searchTerm")

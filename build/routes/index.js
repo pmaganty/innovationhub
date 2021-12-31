@@ -136,12 +136,12 @@ router.get('/user', function (req, res) { return __awaiter(void 0, void 0, void 
 // Create checkout session for user to input payment using Stripe Connect API
 // This is taken from Stripe documentation
 router.post('/create-checkout-session', function (req, res) { return __awaiter(void 0, void 0, void 0, function () {
-    var origin, _a, amount, stripe_id, title, session;
+    var origin, _a, amount, stripe_id, title, idea_id, session;
     return __generator(this, function (_b) {
         switch (_b.label) {
             case 0:
                 origin = "".concat(req.headers.origin);
-                _a = req.body, amount = _a.amount, stripe_id = _a.stripe_id, title = _a.title;
+                _a = req.body, amount = _a.amount, stripe_id = _a.stripe_id, title = _a.title, idea_id = _a.idea_id;
                 return [4 /*yield*/, stripe.checkout.sessions.create({
                         payment_method_types: ['card'],
                         line_items: [
@@ -154,7 +154,7 @@ router.post('/create-checkout-session', function (req, res) { return __awaiter(v
                         ],
                         // ?session_id={CHECKOUT_SESSION_ID} means the redirect will have the session ID set as a query param
                         success_url: "".concat(origin, "/successfulPayment"),
-                        cancel_url: "".concat(origin, "/failedPayment"),
+                        cancel_url: "".concat(origin, "/failedPayment?idea_id=").concat(idea_id),
                     }, {
                         stripeAccount: stripe_id,
                     })];
@@ -177,7 +177,7 @@ router.route("/api/ihub/ideas/:user")
     .delete(ihubController.deleteIdea);
 router.route("/api/ihub/ideas/payment/invalid")
     .delete(ihubController.deleteInvalidIdea);
-router.route("/api/ihub/donations/invalid")
+router.route("/api/ihub/donations/invalid/:id")
     .delete(ihubController.deleteInvalidDonation);
 router.route("/api/ihub/search/:searchTerm")
     .get(ihubController.readAll);

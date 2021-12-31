@@ -33,8 +33,19 @@ function CheckSubmission() {
         }
     }
 
+    // If user is not logged in, redirect to home
+    async function checkLoggedIn() {
+        const user = await API.checkUser();
+        if (user.data == "") {
+        console.log("user not logged in");
+        navigate("/");
+        }
+    }
+
+    // Check if user is logged in 
     // Check user payment info once at render
     useEffect(() => {
+        checkLoggedIn();
         checkLastAccount();
     }, []);
 

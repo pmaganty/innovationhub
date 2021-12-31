@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import Alert from '@mui/material/Alert';
 import AlertTitle from '@mui/material/AlertTitle';
 import Stack from '@mui/material/Stack';
 import { useNavigate } from 'react-router-dom';
 import Button from '@mui/material/Button';
 import HeaderProt from '../components/HeaderProt';
+import API from "../API";
 
 // Reroute user here if payment was successful
 function SuccessPayment() {
@@ -13,6 +14,19 @@ function SuccessPayment() {
   async function navigateToHome() {
       navigate("/home");
   }
+
+  // If user not logged in, redirect to home.
+  async function checkLoggedIn() {
+    const user = await API.checkUser();
+    if (user.data == "") {
+      console.log("user not logged in");
+      navigate("/");
+    }
+  }
+
+  useEffect(() => {
+    checkLoggedIn();
+  }, []); 
 
   return (
     <div>

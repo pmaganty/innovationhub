@@ -105,7 +105,7 @@ module.exports = {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
                         parameter = "%" + req.params.searchTerm + "%";
-                        return [4 /*yield*/, db.query("SELECT * FROM ideas WHERE ((LOWER(firstName) LIKE LOWER($1)) OR (LOWER(lastName) LIKE LOWER($1)) OR (LOWER(descr) LIKE LOWER($1)) OR (LOWER(title) LIKE LOWER($1)))", [parameter])];
+                        return [4 /*yield*/, db.query("SELECT * FROM ideas WHERE ((LOWER(descr) LIKE LOWER($1)) OR (LOWER(title) LIKE LOWER($1)))", [parameter])];
                     case 1:
                         idea_list = _a.sent();
                         res.json(idea_list);
@@ -161,7 +161,6 @@ module.exports = {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        console.log(process.env.DATABASE_URL);
                         return [4 /*yield*/, db.query("INSERT INTO users(user_id, firstName, lastName) VALUES($1, $2, $3) ON CONFLICT (user_id) DO NOTHING", [userInfo.user_id, userInfo.firstName, userInfo.lastName])];
                     case 1:
                         user = _a.sent();
@@ -296,7 +295,7 @@ module.exports = {
                 switch (_a.label) {
                     case 0:
                         _a.trys.push([0, 2, , 3]);
-                        return [4 /*yield*/, db.query("UPDATE ideas SET donations = donations-lastDonated WHERE ideas_id = (SELECT MAX(ideas_id) FROM ideas)")];
+                        return [4 /*yield*/, db.query("UPDATE ideas SET donations = donations-lastDonated WHERE ideas_id = $1", [req.params.id])];
                     case 1:
                         idea = _a.sent();
                         res.json(idea);

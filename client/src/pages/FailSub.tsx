@@ -16,6 +16,21 @@ function FailSub() {
       navigate("/home");
   }
 
+      // Check if user is logged in.
+    // If they are not, redirect to home.
+    async function checkLoggedIn() {
+        const user = await API.checkUser();
+        if (user.data == "") {
+          console.log("user not logged in");
+          navigate("/");
+        }
+    }
+
+    // Delete donation once at render
+    useEffect(() => {
+        checkLoggedIn();
+    }, []);
+
   return (
     <div>
         <HeaderProt />

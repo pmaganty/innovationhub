@@ -22,6 +22,7 @@ interface Payment {
   amount: number;
   stripe_id: number;
   title: string;
+  idea_id: number;
 }
 
 interface IdeaUpdateInfo {
@@ -64,7 +65,8 @@ function Idea(props:Idea) {
       const newPayment: Payment = {
         amount: parseInt(donateRef.current?.value!) * 100, //amount passed to stripe must be in cents
         stripe_id: currentId,
-        title: props.title
+        title: props.title,
+        idea_id: props.id
       };
 
       const newUpdate: IdeaUpdateInfo = {

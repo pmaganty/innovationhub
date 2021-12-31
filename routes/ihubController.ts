@@ -41,7 +41,7 @@ module.exports = {
     readAll: async function(req: any, res: any) {
         try {
             let parameter = "%" + req.params.searchTerm + "%";
-            const idea_list = await db.query("SELECT * FROM ideas WHERE ((LOWER(firstName) LIKE LOWER($1)) OR (LOWER(lastName) LIKE LOWER($1)) OR (LOWER(descr) LIKE LOWER($1)) OR (LOWER(title) LIKE LOWER($1)))", 
+            const idea_list = await db.query("SELECT * FROM ideas WHERE ((LOWER(descr) LIKE LOWER($1)) OR (LOWER(title) LIKE LOWER($1)))", 
                                                 [parameter]);
             res.json(idea_list);
 
@@ -71,7 +71,6 @@ module.exports = {
     // Add new user
     addUser: async function(userInfo: any) {
         try {
-            console.log(process.env.DATABASE_URL);
             const user = await db.query("INSERT INTO users(user_id, firstName, lastName) VALUES($1, $2, $3) ON CONFLICT (user_id) DO NOTHING",
                                         [userInfo.user_id, userInfo.firstName, userInfo.lastName]);
 
@@ -147,8 +146,8 @@ module.exports = {
     // Delete last made donation
     deleteInvalidDonation: async function(req: any, res: any) {
         try {
-
-            const idea = await db.query("UPDATE ideas SET donations = donations-lastDonated WHERE ideas_id = (SELECT MAX(ideas_id) FROM ideas)");
+            const idea = await db.query("UPDATE ideas SET donations = donations-lastDonated WHERE ideas_id = $1",
+                                        [req.params.id]);
             res.json(idea);
 
         } catch (error) {
