@@ -7,7 +7,7 @@
   "scripts": {
     "start": "node build/server.js",
     "tscomp": "tsc",
-    "build": "cd client && npm run build",
+    "frontbuild": "cd client && npm run build",
     "dev": "npm run build && npm run server",
     "server": "tsc && node build/server.js",
     "frontdev": "cd client && npm run start"
