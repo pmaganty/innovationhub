@@ -20,7 +20,6 @@ function HomeDescProt() {
 
   return (
     <div>
-      <div className="row justify-content-center">
         <div className="row justify-content-center">
           <div id="descDiv" className="col-12">
             {/*temp box for line above text*/}
@@ -90,7 +89,6 @@ function HomeDescProt() {
               </div>
             </div>
           </div>
-        </div>
       </div>
     </div>
   );
