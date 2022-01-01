@@ -5,10 +5,10 @@ import "./index.css";
 function HomeImg() {
   return (
     <div>
-        <div className="row justify-content-center">
-            <section id="topsection" className="col-sm-12 col-md-12 col-lg-12">
-                <p id="toptext">INNOVATION HUB</p>
-            </section>
+        <div id="wholeHomeDiv" className="row justify-content-center">
+            <div id="topsection" className="col-12">
+              <h1 id="toptext">INNOVATION HUB</h1>
+            </div>
         </div>
     </div>
   );

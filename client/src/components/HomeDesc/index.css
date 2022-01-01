@@ -25,13 +25,15 @@
 #temp_top {
     background-color: #c6e8f8;
     border-top: 2px solid black;
-    margin-bottom: 50px;
+    margin-bottom: 35px;
+    margin-top: 70px;
 }
 
 #temp_bottom {
     background-color: #c6e8f8;
     border-top: 2px solid black;
-    margin-top: 50px;
+    margin-top: 35px;
+    margin-bottom: 70px;
 }
 
 #buttonDiv {
