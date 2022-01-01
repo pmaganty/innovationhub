@@ -20,7 +20,7 @@ router.get('/auth/google/callback',
 
 // Function to generate account link with account info associated with user payment info
 // This is taken from Stripe documentation
-function generateAccountLink(accountID: any, origin: any, idea_id: any) {
+function generateAccountLink(accountID: string, origin: string, idea_id: string) {
     return stripe.accountLinks
       .create({
         type: "account_onboarding",
@@ -103,23 +103,30 @@ router.post("/onboard-user", async (req, res) => {
 });   
 
 // All custom routes below
+
+// Associated with adding or updating new idea
 router.route("/api/ihub")
   .post(ihubController.addIdea)
   .put(ihubController.updateIdeaStripeID);
 
+// Associated with ideas belonging to specific user
 router.route("/api/ihub/ideas/:user")
   .get(ihubController.readUserIdeas)
   .delete(ihubController.deleteIdea);
 
+// Associated with invalid ideas
 router.route("/api/ihub/ideas/payment/invalid")
   .delete(ihubController.deleteInvalidIdea);
 
+// Associated with invalid donations
 router.route("/api/ihub/donations/invalid/:id")
   .delete(ihubController.deleteInvalidDonation);
 
+// Associated with searching all ideas
 router.route("/api/ihub/search/:searchTerm")
   .get(ihubController.readAll);
 
+// Associated with payments for specific idea
 router.route("/api/ihub/stripeId/:id")
   .get(ihubController.getStripeId)
   .put(ihubController.updateIdea);

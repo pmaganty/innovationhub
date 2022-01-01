@@ -8,7 +8,7 @@ function HeaderProt() {
     <div>
       <Navbar bg="light" variant="light">
         <Container>
-        <Navbar.Brand href="/">IHub</Navbar.Brand>
+        <Navbar.Brand href="/home">IHub</Navbar.Brand>
           <Nav className="me-auto">
             <Nav.Link href="/home">Home</Nav.Link>
             <Nav.Link href="/create">Create</Nav.Link>

@@ -39,7 +39,7 @@ function FailSub() {
                 <Stack sx={{ width: '70%', margin: 'auto', marginTop: '30px' }} spacing={2}>
                 <Alert severity="error">
                     <AlertTitle>Error</AlertTitle>
-                    Your payment information submission was <strong>unsucessful</strong> and the idea was <strong>not created</strong>.
+                    Your payment information submission was <strong>unsuccessful</strong> and the idea was <strong>not created</strong>.
                 </Alert>
                 <Button size="small" color="primary" onClick={navigateToHome}>
                         Back to Home

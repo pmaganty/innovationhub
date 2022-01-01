@@ -36,7 +36,7 @@ function SuccessPayment() {
                 <Stack sx={{ width: '50%', margin: 'auto', marginTop: '30px' }} spacing={2}>
                 <Alert severity="success">
                   <AlertTitle>Success</AlertTitle>
-                  Your payment was <strong>sucessful</strong>!
+                  Your payment was <strong>successful</strong>!
                 </Alert>
                 <Button size="small" color="primary" onClick={navigateToHome}>
                         Back to Home

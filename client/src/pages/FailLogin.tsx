@@ -38,7 +38,7 @@ function FailLogin() {
                 <Stack sx={{ width: '50%', margin: 'auto', marginTop: '30px' }} spacing={2}>
                 <Alert severity="error">
                     <AlertTitle>Error</AlertTitle>
-                    Your login was <strong>unsucessful</strong>.
+                    Your login was <strong>unsuccessful</strong>.
                 </Alert>
                 <Button size="small" color="primary" onClick={navigateToHome}>
                         Back to Home

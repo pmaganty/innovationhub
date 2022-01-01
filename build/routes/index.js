@@ -169,18 +169,24 @@ router.post('/create-checkout-session', function (req, res) { return __awaiter(v
     });
 }); });
 // All custom routes below
+// Associated with adding or updating new idea
 router.route("/api/ihub")
     .post(ihubController.addIdea)
     .put(ihubController.updateIdeaStripeID);
+// Associated with ideas belonging to specific user
 router.route("/api/ihub/ideas/:user")
     .get(ihubController.readUserIdeas)
     .delete(ihubController.deleteIdea);
+// Associated with invalid ideas
 router.route("/api/ihub/ideas/payment/invalid")
     .delete(ihubController.deleteInvalidIdea);
+// Associated with invalid donations
 router.route("/api/ihub/donations/invalid/:id")
     .delete(ihubController.deleteInvalidDonation);
+// Associated with searching all ideas
 router.route("/api/ihub/search/:searchTerm")
     .get(ihubController.readAll);
+// Associated with payments for specific idea
 router.route("/api/ihub/stripeId/:id")
     .get(ihubController.getStripeId)
     .put(ihubController.updateIdea);

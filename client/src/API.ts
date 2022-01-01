@@ -3,67 +3,65 @@ import axios from "axios";
 // This defines all possible API requests that can be made by client
 export default {
   // Add new idea
-  addIdea: function(idea: any) {
+  addIdea: function( idea: {firstName: string, 
+                            lastName: string, 
+                            title: string, 
+                            description: string, 
+                            email: string,
+                            user_id: string}
+                    ) {
     return axios.post("/api/ihub", idea);
   },
   // Update idea with stripe id
-  updateIdeaStripeID: function(info: any) {
+  updateIdeaStripeID: function(info: {stripe_id: string | null, ideas_id: string | null}) {
     return axios.put("/api/ihub", info);
   },
   // Get all ideas associated with a search term
-  readAll: function(newSearch: any) {
+  readAll: function(newSearch: string) {
     return axios.get("/api/ihub/search/" + newSearch);
   },
   // Onboard user payment information to Stripe
-  stripeOnboard: function(info: any) {
+  stripeOnboard: function(info: {email: string, id: number}) {
     return axios.post("/onboard-user", info);
   },
   // Get account object associated with stripe id
-  checkStripeAccount: function(id: any) {
+  checkStripeAccount: function(id: string | null) {
     return axios.get("/stripeAccount/" + id);
   },
   // Get stripe id associated with an idea id
-  getStripeId: function(id: any) {
+  getStripeId: function(id: number) {
     return axios.get("/api/ihub/stripeId/" + id);
   },
   // Create payment method for user donation with Stripe
-  donateMoney: function(newPayment: any) {
-    console.log("fronend route donate money");
+  donateMoney: function(newPayment: {amount: number, stripe_id: number, title: string, idea_id: number}) {
     return axios.post("/create-checkout-session", newPayment);
   },
   // Add new user once authenticated
   createNewUser: function() {
-    console.log("fronend route auth");
     return axios.post("/auth/google");
   },
   // Get current user
   checkUser: function() {
-    console.log("fronend route check user");
     return axios.get("/user");
   },
   // Get all ideas associated with a user
-  readUserIdeas: function(id: any) {
-    console.log("fronend route read user ideas");
+  readUserIdeas: function(id: string) {
     return axios.get("/api/ihub/ideas/" + id);
   },
   // Update idea associated with idea id with user donation amount
-  updateIdea: function(info: any, id: any) {
-    console.log("fronend route update ideas");
+  updateIdea: function(info: {donation: number}, id: number) {
     return axios.put("/api/ihub/stripeId/" + id, info);
   },
   // Delete idea
-  deleteIdea: function(id: any) {
-    console.log("fronend route delete ideas");
+  deleteIdea: function(id: string | null) {
     return axios.delete("/api/ihub/ideas/" + id);
   },
   // Delete Idea if last donation was invalid
   deleteInvalidIdea: function() {
-    console.log("fronend route delete invalid ideas");
     return axios.delete("/api/ihub/ideas/payment/invalid");
   },
   // Delete last donation if payment was invalid
-  deleteInvalidDonation: function(id: any) {
-    console.log("fronend route delete invalid donation");
+  deleteInvalidDonation: function(id: string | null) {
     return axios.delete("/api/ihub/donations/invalid/" + id);
   }
 };

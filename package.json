@@ -6,10 +6,11 @@
   },
   "scripts": {
     "start": "node build/server.js",
-    "dev": "run start:app && npm run start:server",
-    "start:server": "tsc && node build/server.js",
-    "start:app": "cd client && npm run start",
-    "start:dev": "cd client && npm run start"
+    "tscomp": "tsc",
+    "build": "cd client && npm run build",
+    "dev": "npm run build && npm run server",
+    "server": "tsc && node build/server.js",
+    "frontdev": "cd client && npm run start"
   },
   "dependencies": {
     "@heroku/buildpack-registry": "^1.0.1",
