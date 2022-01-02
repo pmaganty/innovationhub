@@ -1,6 +1,9 @@
 {
   "proxy": "http://localhost:5000/",
   "main": "main/server.js",
+  "engines": {
+    "node": "17.x"
+  },
   "scripts": {
     "start": "node build/server.js",
     "tscomp": "tsc",
