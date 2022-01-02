@@ -21,8 +21,10 @@ More test card options are listed in the Features/Search Page section of this Re
 
 ## Prerequisites
 
-1. Node.js
-2. PostgreSql
+1. Node.js Installation
+2. PostgreSql Installation
+3. Google OAuth2.0 API CLIENT_ID and SECRET (change in .env)
+4. PostgreSql CONNECTION_STRING (change in .env)
 
 </br>
 
