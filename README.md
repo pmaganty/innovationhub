@@ -22,6 +22,7 @@ More test card options are listed in the Features/Search Page section of this Re
 ## Prerequisites
 
 1. Node.js
+2. PostgreSql
 
 </br>
 
