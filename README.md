@@ -15,6 +15,8 @@ https://innovationhub1995.herokuapp.com/
 
 This application employs a Model-View-Controller (MVC) architecture.
 
+![architecture](./images/architecture.PNG)
+
 ## Getting started
 
 Follow the below steps to get the application up and running on your local computer
@@ -148,6 +150,8 @@ Endpoint: **/api/ihub**
                             email: string,
                             user_id: string}
 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Response: JSON Object with empty rows key
+
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;http route: *PUT*
 
@@ -156,6 +160,8 @@ Endpoint: **/api/ihub**
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Inputs: 
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BODY: Object of type {stripe_id: string | null, ideas_id: string | null}
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Response: JSON Object with empty rows key
 
 Endpoint: **/api/ihub/search**
 
@@ -167,6 +173,8 @@ Endpoint: **/api/ihub/search**
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; PARAMETERS: Search Term: string
 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Response: JSON Object with rows key containing all database rows containing search term
+
 Endpoint: **/onboard-user**
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;http route: *POST*
@@ -176,6 +184,8 @@ Endpoint: **/onboard-user**
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Inputs: 
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BODY: Object containing user email and associated idea id {email: string, id: number}
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Response: JSON Object with empty rows key
 
 Endpoint: **/stripeAccount**
 
@@ -187,6 +197,8 @@ Endpoint: **/stripeAccount**
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; PARAMETERS: Stripe ID: string
 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Response: Stripe Account object
+
 Endpoint: **/api/ihub/stripeId/**
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;http route: *GET*
@@ -196,6 +208,8 @@ Endpoint: **/api/ihub/stripeId/**
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Inputs: 
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; PARAMETERS: Idea ID: number
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Response: JSON Object with rows key containing relevant rows from database
 
 Endpoint: **/create-checkout-session**
 
@@ -207,6 +221,8 @@ Endpoint: **/create-checkout-session**
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BODY: Object containing donation amount, stripe id of destination, title of the idea, and ID of idea {amount: number, stripe_id: number, title: string, idea_id: number}
 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Response: JSON Object with empty rows key
+
 Endpoint: **/user**
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;http route: *GET*
@@ -216,6 +232,8 @@ Endpoint: **/user**
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Inputs: 
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Response: JSON Object with rows key containing current user data
 
 Endpoint: **/api/ihub/ideas/**
 
@@ -227,6 +245,8 @@ Endpoint: **/api/ihub/ideas/**
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; PARAMETERS: User ID: id: string
 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Response: JSON Object with rows key containing all database rows with given user ID
+
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;http route: *DELETE*
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Description: Delete Idea
@@ -234,6 +254,8 @@ Endpoint: **/api/ihub/ideas/**
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Inputs:
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; PARAMETERS: Idea ID: id: string
+
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Response: JSON Object with empty rows key
 
 Endpoint: **/api/ihub/stripeId/**
 
@@ -247,6 +269,8 @@ Endpoint: **/api/ihub/stripeId/**
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BODY: Object of type {donation: number}
 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Response: JSON Object with empty rows key
+
 Endpoint: **/api/ihub/donations/invalid/**
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;http route: *DELETE*
@@ -257,4 +281,4 @@ Endpoint: **/api/ihub/donations/invalid/**
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; PARAMETERS: Idea ID: string
 
-## Design Decisions
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Response: JSON Object with empty rows key
