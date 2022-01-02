@@ -120,7 +120,7 @@ When the user is signed in, the home page will allow the below:
 ### Create Page
 
 #### Design Explanation: 
-The purpose of this page is to allow a user to enter a new idea into the database. The design is meant to be intuitive - it is much like any form a user has filled out on other websites. The grayed-out form color is there convery that this is a "document" or "entry".
+The purpose of this page is to allow a user to enter a new idea into the database. The design is meant to be intuitive - it is much like any form a user has filled out on other websites. The grayed-out form color is there to convey that this is a "document" or "entry".
 
 #### Capabilities:
 
@@ -140,7 +140,7 @@ The purpose of this page is to allow a user to enter a new idea into the databas
 ### Search Page
 
 #### Design Explanation: 
-The purpose of this page is to allow a a user to search the database for ideas. The design is meant to be intuitive - it is much like any search box a user has used. Each idea is standardized in size and has a scroll box when the description is too large so the user always sees where to donate.
+The purpose of this page is to allow a user to search the database for ideas. The design is meant to be intuitive - it is much like any search box a user has used. Each idea is standardized in size and has a scroll box when the description is too large so the user always sees where to donate.
 
 #### Capabilities:
 
@@ -160,7 +160,7 @@ The purpose of this page is to allow a a user to search the database for ideas. 
 ### My Ideas Page
 
 #### Design Explanation: 
-The purpose of this page is to allow a user to see all ideas they have created and how much funding they have received for each. The design is meant to be simple - each idea size is standardized and the donation amount is highlighted to be easily seen.
+The purpose of this page is to allow a user to see all ideas they have created, how much funding they have received for each, and delete any ideas. The design is meant to be simple - each idea size is standardized and the donation amount is highlighted to be easily seen.
 
 #### Capabilities:
 
@@ -202,7 +202,7 @@ Endpoint: **/api/ihub**
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Inputs: 
 
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BODY: Object of type {stripe_id: string | null, ideas_id: string | null}
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; BODY: Object of type {stripe_id: string, ideas_id: string}
 
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Response: JSON Object with empty rows key
 
