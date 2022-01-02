@@ -7,6 +7,16 @@ This application will allow a user to post new product or service ideas, retriev
 You can view this application at:
 https://innovationhub1995.herokuapp.com/
 
+**Note that this application uses Stripe test mode**. Please use Stripe Test Mode bank account and card when prompted.
+
+Stripe Test Card Info:
+
+    Number: 4242424242424242
+    CVC: Any 3 digits
+    Date: Any future date
+
+More test card options are listed in the Features/Search Page section of this Readme.
+
 ## Prerequisites
 
 1. Node.js
