@@ -42,14 +42,17 @@ Follow the below steps to get the application up and running on your local compu
 git clone https://github.com/pmaganty/innovationhub.git
 cd innovationhub
 npm i
+cd client
+npm i
+cd ..
 npm run start
 ```
 
 Here is what you should expect from the above code:
 1. Clone the github repository to your local area
-2. Go into the repository directory
-3. Install all dependencies using npm
-4. Run the start script and open up localhost:3000 to see the application
+2. Go into the repository directory and install all back-end dependencies using npm
+3. Go into the client directory and install all front-end dependencies using npm
+4. Go back to root directory and run the start script to open up localhost:3000 and see the application
 
 </br>
 
