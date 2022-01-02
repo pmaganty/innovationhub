@@ -313,7 +313,7 @@ function CreateForm() {
                         <Box
                         component="form"
                         sx={{
-                            '& .MuiTextField-root': { m: 1, width: '75ch' },
+                            '& .MuiTextField-root': { m: 1, width: '100%' },
                         }}
                         noValidate
                         autoComplete="off"

@@ -12,7 +12,7 @@ var GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET;
 passport.use(new GoogleStrategy({
     clientID: GOOGLE_CLIENT_ID,
     clientSecret: GOOGLE_CLIENT_SECRET,
-    callbackURL: /*process.env.GOOGLE_HEROKU_CALLBACK*/ process.env.GOOGLE_LOCAL_CALLBACK
+    callbackURL: process.env.GOOGLE_HEROKU_CALLBACK /*process.env.GOOGLE_LOCAL_CALLBACK*/
 }, function (accessToken, refreshToken, profile, done) {
     var user = ihubController.addUser({
         user_id: profile.id,

@@ -58,9 +58,9 @@ function MyIdeas() {
         <div>
             <HeaderProt />
             <div className="row justify-content-center">
-                <div className="col-sm-12 col-md-12 col-lg-12">
+                <div className="col-12">
                     <section className="row justify-content-center">
-                        <div className="col-sm-12 col-md-12 col-lg-12">
+                        <div className="col-12">
                             <div className="row justify-content-center">
                                 {ideas.map( (idea: any) => (
                                     <div>

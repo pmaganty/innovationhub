@@ -106,7 +106,7 @@ function Idea(props:Idea) {
   // render div to dom
   return (
     <div>
-      <section className="col-override col-xs-12 col-sm-12 col-md-6 col-lg-6">
+      <section className="col-override col-xs-11 col-sm-11 col-md-6 col-lg-6">
         <Card sx={{ maxWidth: 500, width:  500}}>
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">

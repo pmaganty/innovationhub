@@ -17,15 +17,21 @@ Stripe Test Card Info:
 
 More test card options are listed in the Features/Search Page section of this Readme.
 
+</br>
+
 ## Prerequisites
 
 1. Node.js
+
+</br>
 
 ## Architecture
 
 This application employs a Model-View-Controller (MVC) architecture.
 
 ![architecture](./images/architecture.PNG)
+
+</br>
 
 ## Getting started
 
@@ -43,6 +49,8 @@ Here is what you should expect from the above code:
 2. Go into the repository directory
 3. Install all dependencies using npm
 4. Run the start script and open up localhost:3000 to see the application
+
+</br>
 
 ## Developing
 
@@ -76,11 +84,18 @@ npm run dev
 ```
 **See package.json for all scripts.**
 
+</br>
+
 ## Features
 
 Below are all of the possible routes a user can take on each page.
 
 ### Home Page
+
+#### Design Explanation: 
+The purpose of this page is to briefly describe the intent of the website and allow the user to easily find where to begin. The design is meant to take the user on a journey of learning about the purpose and then beginning as they scroll down. The color sheme was chosen because of the simplicity and easy-to-see nature.
+
+#### Capabilities:
 
 When the user is not signed in, the home page only allows the below.
 1. Navigate to home 
@@ -103,6 +118,11 @@ When the user is signed in, the home page will allow the below:
 
 ### Create Page
 
+#### Design Explanation: 
+The purpose of this page is to allow a user to enter a new idea into the database. The design is meant to be intuitive - it is much like any form a user has filled out on other websites. The grayed-out form color is there convery that this is a "document" or "entry".
+
+#### Capabilities:
+
 1. Create a new idea by inputing **first name**, **last name**, **title** of the idea, and **description** of the idea.
 
     * When the user hits submit, they will be **prompted to enter their bank account and business information through Stripe** so they can receive donations.
@@ -117,6 +137,11 @@ When the user is signed in, the home page will allow the below:
 ![create-page](./images/create_page.PNG)
 
 ### Search Page
+
+#### Design Explanation: 
+The purpose of this page is to allow a a user to search the database for ideas. The design is meant to be intuitive - it is much like any search box a user has used. Each idea is standardized in size and has a scroll box when the description is too large so the user always sees where to donate.
+
+#### Capabilities:
 
 1. Search for any existing ideas containing a phrase
 2. Donate to an idea
@@ -133,6 +158,11 @@ When the user is signed in, the home page will allow the below:
 
 ### My Ideas Page
 
+#### Design Explanation: 
+The purpose of this page is to allow a user to see all ideas they have created and how much funding they have received for each. The design is meant to be simple - each idea size is standardized and the donation amount is highlighted to be easily seen.
+
+#### Capabilities:
+
 1. View all ideas associated with currently logged in user
 2. Delete an idea associated with currently logged in user
 3. See all donations associated with an idea
@@ -142,6 +172,8 @@ When the user is signed in, the home page will allow the below:
 7. Navigate to Create Page
 
 ![my-ideas](./images/my-ideas.PNG)
+
+</br>
 
 ## API Reference
 
