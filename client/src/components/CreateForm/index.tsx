@@ -270,7 +270,7 @@ function CreateForm() {
             {emailErrSection}
 
             {/*create idea form*/}
-            <div id="formDiv" className="col-auto">
+            <section id="formDiv" className="col-auto">
                 <div className="row justify-content-center">
                     <div id="inputDiv" className="col-12">
                         <Box
@@ -331,7 +331,7 @@ function CreateForm() {
                         </Box>
                     </div>
                 </div>
-                <div id="submitDiv" className="col-auto">
+                <section id="submitDiv" className="col-auto">
                     <Button sx={{
                         backgroundColor: '#497b94',
                         "&:hover": {
@@ -339,8 +339,8 @@ function CreateForm() {
                             }
                         }}
                         variant="contained" onClick={addNew}>Submit</Button>
-                </div>
-            </div>
+                </section>
+            </section>
         </div>
     </div>
     );

@@ -9,12 +9,12 @@ function HomeDesc() {
   return (
     <div>
         <div className="row justify-content-center">
-          <div id="descDiv" className="col-sm-12 col-md-12 col-lg-12">
+          <section id="descDiv" className="col-sm-12 col-md-12 col-lg-12">
             {/*temp box for line above text*/}
             <div className="row justify-content-center">
               <div id="temp_top" className="col-4"></div>
             </div>
-            <section className="row justify-content-center">
+            <article className="row justify-content-center">
               <div className="col-9">
                 <h3 id="description" className="text">If you've ever had an idea come across your mind but didn't know
                   where to start, this is the place to go! You will be able to provide
@@ -23,18 +23,18 @@ function HomeDesc() {
                   other cool ideas and donate to those you truly believe in.
                 </h3>
               </div>
-            </section>
+            </article>
             {/*temp box for line below text*/}
             <div className="row justify-content-center">
               <div id="temp_bottom" className="col-4"></div>
             </div>
-          </div>
-          <div id="startDiv" className="col-12">
+          </section>
+          <section id="startDiv" className="col-12">
             <div className="row justify-content-center">
               <div className="col-sm-12 col-md-12 col-lg-12">
                 <h2 id="startText">Get Started</h2>
                 {/*section to all user to sign in*/}
-                <section className="row justify-content-center">
+                <article className="row justify-content-center">
                   <div id="buttonDiv" className="col-auto">
                     <Stack direction="row"sx={{
                         margin: '0 auto',
@@ -56,10 +56,10 @@ function HomeDesc() {
                       </Button> 
                     </Stack>
                   </div>
-                </section>
+                </article>
               </div>
             </div>
-          </div>
+          </section>
       </div>
     </div>
   );

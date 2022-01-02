@@ -24,7 +24,7 @@ More test card options are listed in the Features/Search Page section of this Re
 1. **Modern JS Library/Framework**: REACT (See client folder**)
 2. **Minimum 3 Interactions**: See Features section for all possible interactions
 3. **Architectural Pattern**: MVC (See Architecture section for diagram)
-4. **Backend service, PostgreSql database, CRUD**: Backend service provided by server.ts, routes/\*, and controllers/\*, models/\*. The models/database.sql describes the database structure and models/db.ts creates the connection to the sql server. All routes are in routes/index.ts.
+4. **Backend service, PostgreSql database, CRUD**: Backend service provided by server.ts, routes/\*, and controllers/\*, models/\*. The models/database.sql describes the database structure and models/db (See the Data Model section).ts creates the connection to the sql server. All routes are in routes/index.ts.
 5. **Third Party RESTful API**: Stripe (See routes/index.js for all stripe routes)
 6. **UI components from material-ui/@core**: Used throughout application: Stack, Box, Alert, Button, Textfield, Card. Examples below.
 
@@ -39,6 +39,14 @@ More test card options are listed in the Features/Search Page section of this Re
 This application employs a Model-View-Controller (MVC) architecture.
 
 ![architecture](./images/architecture.PNG)
+
+</br>
+
+## Data Model
+
+This application uses a PostgreSql Database.
+
+![data-description](./images/data_description.PNG)
 
 </br>
 
