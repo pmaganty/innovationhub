@@ -23,9 +23,9 @@ More test card options are listed in the Features/Search Page section of this Re
 
 1. Node.js Installation
 2. PostgreSql Installation
-3. Google OAuth2.0 API CLIENT_ID and SECRET (change in .env)
+3. Google OAuth2.0 API CLIENT_ID and SECRET (change in .env) (obtain at https://console.cloud.google.com/apis/)
 4. PostgreSql CONNECTION_STRING (change in .env)
-
+5. Create tables in sql server using commands in models/database.sql
 </br>
 
 ## Blend Project Requirements
