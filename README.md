@@ -54,9 +54,12 @@ This application uses a PostgreSql Database.
 
 1. Node.js Installation
 2. PostgreSql Installation
-3. Google OAuth2.0 API CLIENT_ID and SECRET (change in .env) (obtain at https://console.cloud.google.com/apis/)
-4. PostgreSql CONNECTION_STRING (change in .env)
-5. Create tables in sql server using commands in models/database.sql
+3. Chane PORT in server.ts to preferred PORT for local run
+4. Create '.env' file in root directory
+5. Set Google OAuth2.0 API: Add `GOOGLE_CLIENT_ID=\<google client id\>' and 'GOOGLE_CLIENT_SECRET=\<google client secret\>' to .env (Obtain at https://console.cloud.google.com/apis/ by creating new project and credentials. Make sure callback URL has a /auth/google/callback endpoint.)
+6. PostgreSql: Add 'CONNECTION_STRING=\<sql server connect string\>' to .env (See https://www.postgresql.org/docs/current/libpq-connect.html#LIBPQ-CONNSTRING)
+7. Add google OAuth callback url: Add 'GOOGLE_LOCAL_CALLBACK=\<https://localhost:<PORT\>/auth/google/callback\>' to .env
+8. Create tables in sql server using commands in models/database.sql
 
 </br>
 
